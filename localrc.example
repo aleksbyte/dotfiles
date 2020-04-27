@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Local runtime configuration.
+# This file is not symlinked from your dotfiles repo. 
+# It must be manually copied to $HOME
+#
+# Here is an example ~/.localrc:
+
+# Aliases
+alias dl="cd ~/Downloads"
+alias db="cd ~/Dropbox"
+alias dt="cd ~/Desktop"
+alias dw='cd ~/work'
+#alias pr="cd ~/Projects"
+
