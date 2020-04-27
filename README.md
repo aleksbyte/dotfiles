@@ -4,7 +4,7 @@
 
 Dotfiles for a workflow which focuses on:
 
-* XDG Base Directory Specification support (~/.config,~/.local..) 
+* XDG Base Directory Specification support ( ~/.config, ~/.local..) 
 * macOS zsh support.
 * The text editor `Neovim`, customized for IDE-like behaviour.
 * Python3, shell development, ansible.
@@ -19,8 +19,8 @@ Run the make in the terminal:
 ```{bash}
 # Clone the repository to 
 
-# git clone https://github.com/alexbyte/dotfiles.git ....dotfiles
-# make 
+# git clone https://github.com/alexbyte/dotfiles.git
+# make work
 
 ```
 This symlinks the most common configuration files into your home folder.
