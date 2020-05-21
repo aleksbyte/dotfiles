@@ -9,7 +9,8 @@
 Network Trash Folder
 Temporary Items
 
-# Compiled Python files
+# Compiled Python files .. Vim
 *.pyc
+*.swp
 
 
