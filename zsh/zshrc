@@ -68,7 +68,10 @@ setopt prompt_cr               # prompt always at beginning of line
 setopt nonomatch               # Escape URL's special chars (eg.: ?)
 setopt no_list_beep            # Don't beep on an ambiguous completion
 export LSCOLORS=Gxfxcxdxbxegedabagacad   # ls colors
-
+# Globbing
+setopt NO_CASE_GLOB            # Case insensitive globbing
+setopt EXTENDED_GLOB           # Allow the powerful zsh globbing features, see link:
+setopt NUMERIC_GLOB_SORT       # Sort globs that expand to numbers numerically, not by letter (i.e. 01 2 03)
 #}}}
 #{{{# Completion        #
 
@@ -116,96 +119,34 @@ fpath=($(brew --prefix)/share/zsh/functions \
 #autoload bashcompinit && bashcompinit    # Enable bash completion
 
 #}}}
-#{{{# Aliases           #
-# Globbing
-setopt NO_CASE_GLOB       # Case insensitive globbing
-setopt EXTENDED_GLOB      # Allow the powerful zsh globbing features, see link:
-setopt NUMERIC_GLOB_SORT  # Sort globs that expand to numbers numerically, not by letter (i.e. 01 2 03)
-#
-# ZSH global aliases for piping
-#alias -g C='| wc -l'
-#alias -g X='| xargs'
-#alias -g H='| head'
-#alias -g T='| tail'
-#alias -g L="| less"
-#alias -g S='| sort'
-#alias -g G='| grep -i'
-#alias -g F='| fzf'
-#alias -g LL="2>&1 | less"
-#alias -g CA="2>&1 | cat -A"
-# Example ZSH clever aliases
-#alias -s {txt,yml,yaml}=nvim
-# Aliases and functions
-#alias .='pwd'
-#alias ~="cd ~/"
-#alias ..="cd .."
-#alias c='clear'                  # Clear terminal display
-#alias h='history'
-#alias m='make'                   # 
-#alias v='nvim'                   # 
-#alias vi='nvim' 
-#alias vif='nvim $(fzf)'
-# lists
-#alias l='ls -AF'                 # Compact view, show hidden
-#alias l.='ls -d .* '
-#alias ll='ls -alhF'
-#alias lt='ls -ltr'           #  Sort by date, most recent last.
-#alias lk='ls -lSr'           #  Sort by size, biggest last.
-#if [[ -x /usr/local/bin/exa ]]; then
-#   alias l='exa -F --group-directories-first'
-#   alias ls='exa -F --group-directories-first'
-#   alias la='exa -aF --group-directories-first'
-#   alias ll='exa -al --git --group-directories-first'
-#   alias let='exa -T'
-#fi
-# Tree
-#alias tt='tree -L 2'
-#alias ttt='tree -L 3'
-#alias tre='tree -Ca'        # nice alternative to 'ls'
-# Finding stuff!
-#alias fd='find . -type d -name'
-#a#lias ff='find . -type f -name'
-# 
-#alias df='df -kh'
-#alias f='open -a Finder ./'      # Opens current directory in MacOS Finder
-#alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-# 
-#mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"}    # Create directory and move into
-#cl() { cd "$@" && ls -CF }                          # cd to a directory and ls
-#dict() { open dict:///"$@" ; }                      # 
-#}}}
 #{{{# bindkey           #
-# Find the key with: showkey -a
-bindkey "^A"  beginning-of-line           # ctrl+a : move to beginning of line
-bindkey "^E"  end-of-line                 # ctrl-e : move to end of line (e for end)
-bindkey "^K"  vi-kill-eol                 # ctrl-k : delete from character to end of line
-bindkey "^U"  kill-whole-line             # ctrl-u : clear line
-bindkey "^R"  history-incremental-search-backward    # ctrl-r
+# Find the key with: showkey -a ?
+bindkey "^a"  beginning-of-line           # ctrl+a : move to beginning of line
+bindkey "^e"  end-of-line                 # ctrl+e : move to end of line (e for end)
+bindkey '^b'  backward-word               # ctrl+b : move to previous word (b for backward)
+bindkey '^f'  forward-word                # ctrl+f : move to next word (f for forward)
+bindkey "^k"  vi-kill-eol                 # ctrl+k : delete from character to end of line
+bindkey "^u"  kill-whole-line             # ctrl+u : clear line
+# ⌥ + ← or → - move one word backward/forward ?
 bindkey "[D"  backward-word
 bindkey "[C"  forward-word
-# ctrl+b/f or ctrl+left/right : move word by word (backward/forward)
-bindkey '^b'  backward-word               # ctrl + b : move to previous word (b for backward)
-bindkey '^f'  forward-word                # ctrl + f : move to next word (f for forward)
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
 #
-bindkey -s '^e' 'vim $(fzf)\n'
+bindkey "^r"  history-incremental-search-backward    # ctrl+r
 bindkey -s '^o' 'nvim $(fzf)\n'
 #}}}
-#{{{# prompt & fzf      #
+#{{{# prompt            #
 autoload -U promptinit; promptinit
 PURE_GIT_DOWN_ARROW=⇣
 PURE_GIT_UP_ARROW=⇡
 prompt pure
 #
-# fzf
+#}}}
+#{{{# fzf               #
 export FZF_CTRL_R_OPTS='--height 60%';
 export FZF_ALT_C_OPTS='--height 60% --reverse';
 export FZF_COMPLETION_OPTS='--height 40% --reverse';
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #}}}
 #
-[ -f ${XDG_CONFIG_HOME}/zsh/alias.zsh ] && source ${XDG_CONFIG_HOME}/zsh/alias.zsh
-[ -f ${XDG_CONFIG_HOME}/aliases ] && source ${XDG_CONFIG_HOME}/aliases
-[ -f ${XDG_CONFIG_HOME}/functions ] && source ${XDG_CONFIG_HOME}/functions
+[ -f ${XDG_CONFIG_HOME}/zsh/alias ] && source ${XDG_CONFIG_HOME}/zsh/alias
 [ -f ${HOME}/.localrc ] && source ${HOME}/.localrc
