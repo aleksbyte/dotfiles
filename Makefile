@@ -16,7 +16,7 @@ zsh::  ## zsh cfg installation
 	   	then mkdir -p ${XDG_CONFIG_HOME}/zsh; fi;
 	cp ${SRC}/zsh/zshenv $(XDG_CONFIG_HOME)/zsh/.zshenv
 	cp ${SRC}/zsh/zshrc $(XDG_CONFIG_HOME)/zsh/.zshrc
-	cp ${SRC}/zsh/alias.zsh $(XDG_CONFIG_HOME)/zsh/
+	cp ${SRC}/zsh/alias $(XDG_CONFIG_HOME)/zsh/
 	if [ ! -f ${DST}/.localrc ]; \
 	    then cp -f $(SRC)/localrc.example $(DST)/.localrc; \
 	fi;
