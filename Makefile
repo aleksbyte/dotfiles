@@ -27,6 +27,7 @@ nvim::    ## neovim-cfg./plugins installations
 	if [ ! -d ${XDG_CONFIG_HOME}/nvim ]; \
 		then mkdir ${XDG_CONFIG_HOME}/nvim; fi;
 	cp -r ${SRC}/nvim/init.vim ${XDG_CONFIG_HOME}/nvim
+	cp -r ${SRC}/nvim/coc-settings.json ${XDG_CONFIG_HOME}/nvim
 	curl -fLo ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs \
 	   	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim -E -s -u ${XDG_CONFIG_HOME}/nvim/init.vim +PlugInstall +qall

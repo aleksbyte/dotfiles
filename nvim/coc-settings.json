@@ -1,0 +1,30 @@
+{
+    "diagnostic.checkCurrentLine": false,
+    "diagnostic.enable": true,
+    "diagnostic.warningSign": "●",
+    "diagnostic.errorSign": "●",
+    "diagnostic.infoSign": "○",
+    "diagnostic.hintSign": "○",
+
+    "languageserver": {
+        "bash": {
+           "command": "bash-language-server",
+           "args": ["start"],
+           "filetypes": ["sh"],
+           "ignoredRootPaths": ["~"]
+        }
+    },
+
+    "python.jediEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+
+    "yaml.format.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.trace.server": "verbose",
+    "yaml.schemas": {
+        "http://json.schemastore.org/ansible-stable-2.9": "yaml.ansible"
+    }
+}
