@@ -18,14 +18,14 @@ alias -g G='| grep -i'
 alias -g F='| fzf'
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
+alias -g NUL='&> /dev/null'
+alias -g J='| python -m json.tool'
+alias -g CD='&& $_'
 #
 # Suffix Aliases  - Example ZSH clever aliases
 #
-alias -s {txt,yml,yaml}=nvim
-alias -s {py,sh}=nvim
-alias -s {md}=code
-alias -s {json}=code
-alias -s {html}=code
+alias -s {txt,yml,yaml,py}=nvim
+alias -s {md,json,html}=code
 #
 # Functions for Aliases With Parameters
 #
@@ -65,6 +65,8 @@ alias tre='tree -Ca'        # nice alternative to 'ls'
 # Finding stuff!
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
+ffmin() { find . -type f -size +$1; }
+ffmax() { find . -type f -size -$1; }
 #
 alias df='df -kh'
 alias f='open -a Finder ./'      # Opens current directory in MacOS Finder

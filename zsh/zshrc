@@ -33,8 +33,9 @@ HISTFILE="$ZSH_CACHE/zhistory"
 HISTSIZE=16384                 # size of the run-time history list
 SAVEHIST=16384
 export CLICOLOR=1
-set -o vi                      # vi mode
-setopt share_history           # share command history data
+# set -o vi                      # vi mode
+set -o emacs                   # emacs mode
+setopt share_history           
 setopt extended_history        # Add timestamps to history
 setopt inc_append_history      # add commands to HISTFILE in order of execution
 setopt append_history          # Append history to existing file
@@ -125,11 +126,13 @@ bindkey "^a"  beginning-of-line           # ctrl+a : move to beginning of line
 bindkey "^e"  end-of-line                 # ctrl+e : move to end of line (e for end)
 bindkey '^b'  backward-word               # ctrl+b : move to previous word (b for backward)
 bindkey '^f'  forward-word                # ctrl+f : move to next word (f for forward)
-bindkey "^k"  vi-kill-eol                 # ctrl+k : delete from character to end of line
+#bindkey "^k"  vi-kill-eol                 # ctrl+k : delete from character to end of line
+bindkey "^k"  kill-line                 # ctrl+k : delete from character to end of line
 bindkey "^u"  kill-whole-line             # ctrl+u : clear line
 # ⌥ + ← or → - move one word backward/forward ?
 bindkey "[D"  backward-word
 bindkey "[C"  forward-word
+
 #
 bindkey "^r"  history-incremental-search-backward    # ctrl+r
 bindkey -s '^o' 'nvim $(fzf)\n'
