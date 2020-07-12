@@ -1,4 +1,4 @@
-" NeoVim Configuration
+" NeoVim Conrfiguration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{  BASIC
 set nocompatible
@@ -19,6 +19,7 @@ filetype indent plugin on    " Format indentation
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{  PLUGINS
 " Use plug package manager
+
 " Install vim-plug if not found
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -27,9 +28,14 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 "    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 "
+
 call plug#begin()
 Plug 'itchyny/lightline.vim'     "{{{ Light and configurable statusline/tabline plugin.
 " }}}
+
+Plug 'mark-westerhof/vim-lightline-base16'
+"
+"
 Plug 'skywind3000/asyncrun.vim'  "{{{ enable you to run shell commands in background
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr> " run make
 nnoremap <F5> :call <SID>compile_and_run()<CR>
@@ -80,7 +86,7 @@ nmap <silent><leader>gb :Gblame<cr>    " fuGitive
 " nnoremap <Leader>d :Gdiff<CR>
 
 "nmap <Leader>gb :Gblame<cr>
-nmap <Leader>gs :Gstatus<cr>
+"nmap <Leader>gs :Gstatus<cr>
 nmap <Leader>gc :Gcommit -v<cr>
 nmap <Leader>ga :Git add -p<cr>
 nmap <Leader>gd :Gdiff<cr>
@@ -88,6 +94,20 @@ nmap <Leader>gd :Gdiff<cr>
 "nmap <Leader>gp :Gpush<cr>
 "nmap <Leader>gw :Gwrite<cr>
 
+" }}}
+"Plug 'SirVer/ultisnips'          "{{{ Snippets plugin
+" Snippets are separated from the engine. Add this if you want them:
+"Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsListSnippets="<C-l>"
+"let g:UltiSnipsJumpForwardTrigger="<C-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+"let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories  = ['codesnippets']
+" let g:UltiSnipsSnippetsDir = '~/.vim/codesnippets'
+" let g:UltiSnipsEditSplit = 'context'
+"nnoremap <Leader>es :UltiSnipsEdit<Cr>
 " }}}
 "Plug 'phenomenes/ansible-snippets'  "{{{ ansible-snippets
 Plug 'phenomenes/ansible-snippets'
@@ -100,20 +120,66 @@ au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */roles/*/*.yml set   filetype=yaml.ansible
 au BufRead,BufNewFile *inventory*.yml set   filetype=yaml.ansible
 "}}}
+
+"  Plug 'iamcco/markdown-preview.nvim'       {{{     MarkdownPreview
+"Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
+"  https://github.com/iamcco/markdown-preview.nvim
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+let g:mkdp_auto_start = 0
+nmap <leader>h :MarkdownPreview<cr>
+nmap <leader>hc :MarkdownPreviewStop><cr>
+"nmap <leader>v :MarkdownPreviewToggle<cr>
+"nmap <C-s> <Plug>MarkdownPreview
+"nmap <M-s> <Plug>MarkdownPreviewStop
+"nmap <C-p> <Plug>MarkdownPreviewToggle
+
+Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
+nmap <leader>m :MarkedOpen!<cr>
+nmap <leader>mq :MarkedQuit<cr>
+nmap <leader>* *<c-o>:%s///gn<cr>
+"" markdown
+
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['go', 'python', 'bash=sh', 'yaml']
+let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 100
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+
+augroup PrevimSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+
+"let g:vim_markdown_folding_disabled = 1
+"    " markdown {{{
+"        Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+"        let g:markdown_fenced_languages = [ 'tsx=typescript.tsx' ]
+"let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+"        " Open markdown files in Marked.app - mapped to <leader>m
+
+"    " }}}
+"}}
 "  Plug 'neoclide/coc.nvim'      {{{
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 let g:coc_global_extensions = [
             \ 'coc-sh',
             \ 'coc-python',
             \ 'coc-snippets',
+            \ 'coc-vimlsp',
+            \ 'coc-sh',
             \ 'coc-git',
             \ 'coc-json',
             \ 'coc-yaml',
             \ ]
 let g:coc_filetype_map = { 'yaml.ansible': 'y*ml', }
+
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
 " }}}
 Plug 'morhetz/gruvbox'           "{{{ Color theme gruvbox
 let g:gruvbox_contrast_dark = 'soft'
@@ -172,7 +238,9 @@ set nolist                    " Show invisible characters using listchars
 nnoremap <leader>l :set list<CR>
 nnoremap <leader>k :set nolist<CR>
 " Set to show invisibles (tabs & trailing spaces) & their highlight color
-set list listchars=tab:»\ ,trail:·
+"set list listchars=tab:»\ ,trail:·
+set list                    " Show invisible characters using listchars
+"set list listchars=tab:▸\ ,eol:¬
 " Set filetype tab settings
 autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -224,3 +292,6 @@ map <leader>- :e $HOME/.config/nvim/init.vim<CR>            " init.vim editing
 map <silent> <F1> :source $HOME/.config/nvim/init.vim<CR>   " source init.vim
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:lightline = {
+"\   'colorscheme': 'base16_gruvbox_light_soft'
+"\ }

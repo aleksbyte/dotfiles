@@ -6,6 +6,11 @@
     "diagnostic.infoSign": "○",
     "diagnostic.hintSign": "○",
 
+    "git.addedSign.text": "┃",
+    "git.removedSign.text": "┃",
+    "git.changedSign.text": "┃",
+    "git.changeRemovedSign.text": "┃",
+
     "languageserver": {
         "bash": {
            "command": "bash-language-server",
@@ -28,3 +33,4 @@
         "http://json.schemastore.org/ansible-stable-2.9": "yaml.ansible"
     }
 }
+
