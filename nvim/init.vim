@@ -181,6 +181,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " }}}
+
+"Plug 'Pablo1107/codi.vim', { 'branch': 'nvim-virtual-text' } "{{{
+Plug 'Pablo1107/codi.vim' "{{{
+" }}}
+
 Plug 'morhetz/gruvbox'           "{{{ Color theme gruvbox
 let g:gruvbox_contrast_dark = 'soft'
 "}}}
