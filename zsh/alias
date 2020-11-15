@@ -5,26 +5,37 @@
 # Simple Aliases
 # OS specific aliases ~~~> ~/.localrc
 
-#
 # Global Aliases  - ZSH global aliases for piping
 #
 alias -g C='| wc -l'
 alias -g X='| xargs'
 alias -g H='| head'
 alias -g T='| tail'
-alias -g L="| less"
+alias -g L='| less'
 alias -g S='| sort'
-alias -g G='| grep -i'
+alias -g G='| grep --color=auto -E' ######
+alias -g R='| rg'
 alias -g F='| fzf'
+alias -g S='| sort' ###
+alias -g T='| tail' ###
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
+alias -g N='> /dev/null'
+alias -g NN='> /dev/null 2>&1'
 alias -g NUL='&> /dev/null'
-alias -g J='| python -m json.tool'
+alias -g J='| jq -C .'
+alias -g JP='| python -m json.tool'
 alias -g CD='&& $_'
+alias -g X='| xargs'
+alias -g X1='| xargs -n 1'
+alias -g XL='| tr "\n" "\0" | xargs -0'
+alias -g W='| wc -l' ####
+alias -g V='| nvim -'
+alias -g 21="2>&1"
 #
 # Suffix Aliases  - Example ZSH clever aliases
 #
-alias -s {txt,yml,yaml,py}=nvim
+alias -s {txt,yml,yaml}=nvim
 alias -s {md,json,html}=code
 #
 # Functions for Aliases With Parameters
@@ -44,7 +55,8 @@ alias h='history'
 alias m='make'                   #
 alias v='nvim'                   #
 alias vi='nvim'
-alias vif='nvim $(fzf)'
+#alias vif='nvim $(fzf)'
+alias vif='nvim $(fzf --height 40% --reverse)'
 # lists
 alias l='ls -AF'                 # Compact view, show hidden
 alias l.='ls -d .* '
@@ -63,7 +75,7 @@ alias tt="tree -L 2 -aC -I '.git |.DS_Store'"
 alias ttt="tree -L 3 -aC -I '.git |.DS_Store'"
 alias tre='tree -Ca'        # nice alternative to 'ls'
 # Finding stuff!
-alias fd='find . -type d -name'
+#alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 ffmin() { find . -type f -size +$1; }
 ffmax() { find . -type f -size -$1; }
@@ -76,11 +88,11 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias ans='ansible'
 alias anp='ansible-playbook'
 alias anv='ansible-vault --ask-vault-pass'
-alias and='ansible-doc'                                                         
-alias ang='ansible-galaxy'                                                     
-alias anl='ansible-lint'                                                     
+alias and='ansible-doc'
+alias ang='ansible-galaxy'
+alias anl='ansible-lint'
 
-# alias for Terraform                                                             
+# alias for Terraform  
 alias tf='terraform'
 alias tp='terraform plan'
 alias ta='terraform apply'
@@ -104,15 +116,4 @@ alias tl='tmux ls'                               # list
 alias tk='tmux kill-session -s'                  # kill session name
 alias td="tmux detach"
 alias tmux='TERM=xterm-256color tmux'
-#alias tml="tmux list-sessions"
-#alias tma="tmux attach-session"
 #
-#
-#
-#export POWERSHELL_TELEMETRY_OPTOUT=1
-#
-#export PATH="/usr/local/opt/python@3.8/bin:$PATH"
-#alias py='/usr/local/opt/python@3.8/bin/python3.8'
-#export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
-#export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-

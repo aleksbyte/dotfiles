@@ -10,21 +10,22 @@ if [[ ! -f $XDG_DATA_HOME/zsh/zgen/zgen.zsh ]]; then
 fi
 ZGEN_AUTOLOAD_COMPINIT=1
 source $XDG_DATA_HOME/zsh/zgen/zgen.zsh
-##
+#
 if ! zgen saved; then
     echo "Creating a zgen save"
-    # Automatically run zgen update and zgen selfupdate every 7 days
-    zgen load unixorn/autoupdate-zgen      
-    zgen load zsh-users/zsh-completions src  
+#    # Automatically run zgen update and zgen selfupdate every 7 days
+    zgen load unixorn/autoupdate-zgen
+    zgen load zsh-users/zsh-completions src
     zgen load BurntSushi/ripgrep complete
     zgen load zsh-users/zsh-autosuggestions
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
     zgen load mafredri/zsh-async
     zgen load sindresorhus/pure
-    zgen load junegunn/fzf shell
-    zgen load urbainvaes/fzf-marks
     zgen save
 fi
+#export PURE_GIT_DOWN_ARROW='▼'
+#export PURE_GIT_UP_ARROW='▲'
+#export GIT=''
 #}}}
 #{{{# Options           #
 # History command configuration
@@ -35,7 +36,7 @@ SAVEHIST=16384
 export CLICOLOR=1
 # set -o vi                      # vi mode
 set -o emacs                   # emacs mode
-setopt share_history           
+setopt share_history
 setopt extended_history        # Add timestamps to history
 setopt inc_append_history      # add commands to HISTFILE in order of execution
 setopt append_history          # Append history to existing file
@@ -69,6 +70,8 @@ setopt prompt_cr               # prompt always at beginning of line
 setopt nonomatch               # Escape URL's special chars (eg.: ?)
 setopt no_list_beep            # Don't beep on an ambiguous completion
 export LSCOLORS=Gxfxcxdxbxegedabagacad   # ls colors
+ZSH_THEME="gruvbox"
+SOLARIZED_THEME="dark"
 # Globbing
 setopt NO_CASE_GLOB            # Case insensitive globbing
 setopt EXTENDED_GLOB           # Allow the powerful zsh globbing features, see link:
@@ -116,9 +119,7 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 fpath=($(brew --prefix)/share/zsh/functions \
        $(brew --prefix)/share/zsh-completions \
        $(brew --prefix)/share/zsh/site-functions $fpath)
-
 #autoload bashcompinit && bashcompinit    # Enable bash completion
-
 #}}}
 #{{{# bindkey           #
 # Find the key with: showkey -a ?
@@ -130,26 +131,40 @@ bindkey '^f'  forward-word                # ctrl+f : move to next word (f for fo
 bindkey "^k"  kill-line                 # ctrl+k : delete from character to end of line
 bindkey "^u"  kill-whole-line             # ctrl+u : clear line
 # ⌥ + ← or → - move one word backward/forward ?
-bindkey "[D"  backward-word
-bindkey "[C"  forward-word
-
+#bindkey "[D"  backward-word
+#bindkey "[C"  forward-word
+# bindkey "ç" fzf-cd-widget
 #
-bindkey "^r"  history-incremental-search-backward    # ctrl+r
+# bindkey "^r"  history-incremental-search-backward  # ctrl+r re-asign to fzf
 bindkey -s '^o' 'nvim $(fzf)\n'
 #}}}
-#{{{# prompt            #
+#{{{# prompt 
+#autoload -Uz vcs_info
+#precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+#zstyle ':vcs_info:git:*' formats 'on branch %b'
+# Set up the prompt (with git branch name)
+#setopt PROMPT_SUBST
+#PROMPT='%n in ${PWD/#$HOME/~} > '
+#RPROMPT=\$vcs_info_msg_0_
+
+#PURE_GIT_DOWN_ARROW=▼
+#PURE_GIT_UP_ARROW=▲
+##PURE_GIT_DOWN_ARROW=⇣
+##PURE_GIT_UP_ARROW=⇡
+##PURE_GIT_DOWN_ARROW=▼
+##PURE_GIT_UP_ARROW=▲
+# turn on git stash status
 autoload -U promptinit; promptinit
-PURE_GIT_DOWN_ARROW=⇣
-PURE_GIT_UP_ARROW=⇡
+zstyle :prompt:pure:git:stash show yes
 prompt pure
 #
 #}}}
 #{{{# fzf               #
-export FZF_CTRL_R_OPTS='--height 60%';
-export FZF_ALT_C_OPTS='--height 60% --reverse';
-export FZF_COMPLETION_OPTS='--height 40% --reverse';
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #}}}
-#
+
 [ -f ${XDG_CONFIG_HOME}/zsh/alias ] && source ${XDG_CONFIG_HOME}/zsh/alias
 [ -f ${HOME}/.localrc ] && source ${HOME}/.localrc

@@ -39,6 +39,7 @@ export EDITOR
 if test -n "$(command -v less)" ; then
     PAGER="less -FirSwX"
     MANPAGER="less -FiRswX"
+    LESS=-RX      # -X: don't clear screen before and after less
 else
     PAGER=more
     MANPAGER="$PAGER"
@@ -52,4 +53,6 @@ export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_PYTHON_LOG_FILE=/tmp/log
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
-
+#
+export POWERSHELL_TELEMETRY_OPTOUT=1
+#

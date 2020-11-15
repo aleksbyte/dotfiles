@@ -21,7 +21,6 @@ Run the make in the terminal:
 
 # git clone https://github.com/alexbyte/dotfiles.git
 # make work
-
 ```
 This symlinks the most common configuration files into your home folder.
 
