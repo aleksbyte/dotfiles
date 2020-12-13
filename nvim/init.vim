@@ -32,10 +32,7 @@ endif
 call plug#begin()
 Plug 'itchyny/lightline.vim'     "{{{ Light and configurable statusline/tabline plugin.
 " }}}
-
 Plug 'mark-westerhof/vim-lightline-base16'
-"
-"
 Plug 'skywind3000/asyncrun.vim'  "{{{ enable you to run shell commands in background
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr> " run make
 nnoremap <F5> :call <SID>compile_and_run()<CR>
@@ -50,7 +47,10 @@ function! s:compile_and_run()
     elseif &filetype == 'sh'
        exec "AsyncRun! time bash %"
     elseif &filetype == 'python'
-       exec "AsyncRun! time python %"
+       exec "AsyncRun! time python3 %"
+    elseif &filetype == 'go'
+       exec "AsyncRun! go build %<"
+       exec "AsyncRun! time go run %"
     elseif &filetype == 'make'
        exec "AsyncRun! time make -f makefile %"
     endif
@@ -76,6 +76,14 @@ nnoremap <silent><leader>o :Files<CR>    " Search files recursively ([o]pen file
 nnoremap <silent><leader>g :Rg<CR>       " Search in rg search
 nnoremap <silent><leader>s :Snippets<CR>
 "nnoremap <silent><leader>s :Snippets<CR> " Search in ultisnips [s]nippets
+nnoremap <silent> <leader>f :FZF<cr>     " find file under current directory
+nnoremap <silent> <leader>F :FZF ~<cr>   " find file under HOME directory
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :Buffers<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-f> :Rg 
+
 " }}}
 Plug 'tpope/vim-fugitive'        "{{{  git plugin
 nmap <silent><leader>gs :Gstatus<cr>   " fuGitive
@@ -108,6 +116,20 @@ nmap <Leader>gd :Gdiff<cr>
 " let g:UltiSnipsSnippetsDir = '~/.vim/codesnippets'
 " let g:UltiSnipsEditSplit = 'context'
 "nnoremap <Leader>es :UltiSnipsEdit<Cr>
+
+"https://2sang.github.io/journal/vim-snippets-management.html
+"Separate vim-snippets and your private snippets
+" Our personal snippets go into ~/dotfiles/user_snippets.
+" By defining this, ':UltiSnipsEdit' call opens new file at this location
+"let g:UltiSnipsSnippetsDir="~/dotfiles/user_snippets"
+
+" Add your private snippet path to runtimepath
+"set runtimepath^=~/dotfiles
+" When vim starts, Ultisnips tries to find snippet directories defined below, under the paths in runtimepath.
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "user_snippets"]
+
+"nnoremap <leader>es :UltiSnipsEdit<cr>
+
 " }}}
 "Plug 'phenomenes/ansible-snippets'  "{{{ ansible-snippets
 Plug 'phenomenes/ansible-snippets'
@@ -120,7 +142,9 @@ au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
 au BufRead,BufNewFile */roles/*/*.yml set   filetype=yaml.ansible
 au BufRead,BufNewFile *inventory*.yml set   filetype=yaml.ansible
 "}}}
-
+"
+Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting"
+"
 "  Plug 'iamcco/markdown-preview.nvim'       {{{     MarkdownPreview
 "Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
 "  https://github.com/iamcco/markdown-preview.nvim
@@ -132,27 +156,22 @@ nmap <leader>hc :MarkdownPreviewStop><cr>
 "nmap <C-s> <Plug>MarkdownPreview
 "nmap <M-s> <Plug>MarkdownPreviewStop
 "nmap <C-p> <Plug>MarkdownPreviewToggle
-
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
 nmap <leader>m :MarkedOpen!<cr>
 nmap <leader>mq :MarkedQuit<cr>
 nmap <leader>* *<c-o>:%s///gn<cr>
 "" markdown
-
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['go', 'python', 'bash=sh', 'yaml']
 let g:markdown_syntax_conceal = 0
 let g:markdown_minlines = 100
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
-
 augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-
 "let g:vim_markdown_folding_disabled = 1
 "    " markdown {{{
 "        Plug 'tpope/vim-markdown', { 'for': 'markdown' }
@@ -162,14 +181,22 @@ augroup END
 
 "    " }}}
 "}}
-"  Plug 'neoclide/coc.nvim'      {{{
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+
+" vim-plug
+"Plug 'neovim/nvim-lspconfig'
+" minpac
+"call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
+"packadd nvim-lspconfig
+
+"Plug 'neoclide/coc.nvim'    "  {{{
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 let g:coc_global_extensions = [
             \ 'coc-sh',
             \ 'coc-python',
             \ 'coc-snippets',
             \ 'coc-vimlsp',
-            \ 'coc-sh',
             \ 'coc-git',
             \ 'coc-json',
             \ 'coc-yaml',
@@ -177,27 +204,49 @@ let g:coc_global_extensions = [
 let g:coc_filetype_map = { 'yaml.ansible': 'y*ml', }
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 " }}}
 
 "Plug 'Pablo1107/codi.vim', { 'branch': 'nvim-virtual-text' } "{{{
-Plug 'Pablo1107/codi.vim' "{{{
+"Plug 'Pablo1107/codi.vim' "{{{
 " }}}
 
+" https://github.com/fcpg/vim-showmap
+" Plug 'fcpg/vim-showmap'  "helps you type multi-char mappings
+
 Plug 'morhetz/gruvbox'           "{{{ Color theme gruvbox
-let g:gruvbox_contrast_dark = 'soft'
+"Plug 'adrian5/oceanic-next-vim'
 "}}}
 call plug#end()
 "
 "Color Settings
 colorscheme gruvbox    " gruvbox
 set background=dark    " gruvbox dark
+"let g:gruvbox_contrast_dark = 'soft'
+"let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_italic=1
+
+" nord theme
+"if (has("termguicolors"))
+"    set termguicolors
+"endif
+" Adds correct highlighting of JSONC files
+"autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"let g:oceanic_gutter_like_bg=0
+"let g:oceanic_bold = 0
+"colorscheme oceanicnext
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "{{{  CONFIGURATION
 set rtp+=/usr/local/opt/fzf
 set showmatch               " Show highlight matching brackets  [{()}]
+
+" https://www.reddit.com/r/neovim/comments/jy8akf/til_i_can_use_direnv_with_fzfvim_for_project/
+set exrc secure " direnv - Add to .exrc file in the root directory of your project ..
+" let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow \ 
+"      --glob "!.git/*" --glob "!build/*" --glob "!.autogenerated"'
 " Configure spell checking
 nmap <silent> <leader>p :set spell!<CR>
 set spelllang=en_us
@@ -228,7 +277,20 @@ set foldlevel=2
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 set foldenable          " enable folding
 set nofoldenable
-" }}}
+" https://bitcrowd.dev/folding-sections-of-markdown-in-vim
+"let g:markdown_folding = 1 " folding markdown
+"command	effect
+"zo	open current fold
+"zO	recursively open current fold
+"zc	close current fold
+"zC	recursively close current fold
+"za	toggle current fold
+"zA	recursively open/close current fold
+"zm	reduce foldlevel by one
+"zM	close all folds
+"zr	increase foldlevel by one
+"zR	open all folds
+"}}}
 " {{{ Searching & Replacing
 "set gdefault                   " use 'global' mode by default for substitutions
 set hlsearch                         " highlight searched items
@@ -244,7 +306,8 @@ nnoremap <leader>l :set list<CR>
 nnoremap <leader>k :set nolist<CR>
 " Set to show invisibles (tabs & trailing spaces) & their highlight color
 "set list listchars=tab:»\ ,trail:·
-set list                    " Show invisible characters using listchars
+set list                              "Show invisible characters using listchars
+set listchars=tab:▸\ ,nbsp:␣,trail:·  "Define chars for 'list'
 "set list listchars=tab:▸\ ,eol:¬
 " Set filetype tab settings
 autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et

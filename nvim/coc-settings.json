@@ -4,7 +4,7 @@
     "diagnostic.warningSign": "●",
     "diagnostic.errorSign": "●",
     "diagnostic.infoSign": "○",
-    "diagnostic.hintSign": "○",
+    "diagnostic.hintSign": ".",
 
     "git.addedSign.text": "┃",
     "git.removedSign.text": "┃",
@@ -13,24 +13,37 @@
 
     "languageserver": {
         "bash": {
-           "command": "bash-language-server",
-           "args": ["start"],
-           "filetypes": ["sh"],
-           "ignoredRootPaths": ["~"]
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh, bash"],
+            "ignoredRootPaths": ["~"]
         }
     },
 
+    // Python
     "python.jediEnabled": false,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=100"],
     "python.formatting.provider": "black",
+    "python.linting.mypyEnabled": true,
+    "python.linting.pydocstyleEnabled": true,
 
+    // Snippets
+    "snippets.userSnippetsDirectory": "~/.config/ultisnips",
+
+    // YAML
+    "yaml.validate": true,
+    "yaml.completion": true,
     "yaml.format.enable": true,
     "yaml.format.singleQuote": true,
     "yaml.trace.server": "verbose",
     "yaml.schemas": {
-        "http://json.schemastore.org/ansible-stable-2.9": "yaml.ansible"
+        "https://json.schemastore.org/ansible-inventosy": "yaml.ansible",
+        "https://json.schemastore.org/ansible-playbook": "yaml.ansible",
+        "https://json.schemastore.org/ansible-role-2.9": "yaml.ansible",
+        "https://json.schemastore.org/ansible-collection-galaxy": "yaml.ansible"
     }
 }
 

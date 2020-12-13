@@ -23,9 +23,6 @@ if ! zgen saved; then
     zgen load sindresorhus/pure
     zgen save
 fi
-#export PURE_GIT_DOWN_ARROW='▼'
-#export PURE_GIT_UP_ARROW='▲'
-#export GIT=''
 #}}}
 #{{{# Options           #
 # History command configuration
@@ -121,6 +118,7 @@ fpath=($(brew --prefix)/share/zsh/functions \
        $(brew --prefix)/share/zsh/site-functions $fpath)
 #autoload bashcompinit && bashcompinit    # Enable bash completion
 #}}}
+
 #{{{# bindkey           #
 # Find the key with: showkey -a ?
 bindkey "^a"  beginning-of-line           # ctrl+a : move to beginning of line
@@ -128,15 +126,12 @@ bindkey "^e"  end-of-line                 # ctrl+e : move to end of line (e for 
 bindkey '^b'  backward-word               # ctrl+b : move to previous word (b for backward)
 bindkey '^f'  forward-word                # ctrl+f : move to next word (f for forward)
 #bindkey "^k"  vi-kill-eol                 # ctrl+k : delete from character to end of line
-bindkey "^k"  kill-line                 # ctrl+k : delete from character to end of line
+bindkey "^k"  kill-line                   # ctrl+k : delete from character to end of line
 bindkey "^u"  kill-whole-line             # ctrl+u : clear line
 # ⌥ + ← or → - move one word backward/forward ?
 #bindkey "[D"  backward-word
 #bindkey "[C"  forward-word
-# bindkey "ç" fzf-cd-widget
 #
-# bindkey "^r"  history-incremental-search-backward  # ctrl+r re-asign to fzf
-bindkey -s '^o' 'nvim $(fzf)\n'
 #}}}
 #{{{# prompt 
 #autoload -Uz vcs_info
@@ -149,12 +144,14 @@ bindkey -s '^o' 'nvim $(fzf)\n'
 #PROMPT='%n in ${PWD/#$HOME/~} > '
 #RPROMPT=\$vcs_info_msg_0_
 
-#PURE_GIT_DOWN_ARROW=▼
-#PURE_GIT_UP_ARROW=▲
 ##PURE_GIT_DOWN_ARROW=⇣
 ##PURE_GIT_UP_ARROW=⇡
-##PURE_GIT_DOWN_ARROW=▼
-##PURE_GIT_UP_ARROW=▲
+##export GIT=''
+export GIT=''
+PURE_GIT_DOWN_ARROW='▼'
+PURE_GIT_UP_ARROW='▲'
+PURE_GITSTASH_SYMBOL='■'
+
 # turn on git stash status
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:git:stash show yes
@@ -162,7 +159,6 @@ prompt pure
 #
 #}}}
 #{{{# fzf               #
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #}}}
 

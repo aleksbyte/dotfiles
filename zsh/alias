@@ -3,7 +3,7 @@
 # Suffix Aliases
 # Functions for Aliases With Parameters
 # Simple Aliases
-# OS specific aliases ~~~> ~/.localrc
+# OS/host specific aliases ~~~> ~/.localrc
 
 # Global Aliases  - ZSH global aliases for piping
 #
@@ -55,8 +55,6 @@ alias h='history'
 alias m='make'                   #
 alias v='nvim'                   #
 alias vi='nvim'
-#alias vif='nvim $(fzf)'
-alias vif='nvim $(fzf --height 40% --reverse)'
 # lists
 alias l='ls -AF'                 # Compact view, show hidden
 alias l.='ls -d .* '
