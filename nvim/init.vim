@@ -190,8 +190,6 @@ augroup END
 
 "Plug 'neoclide/coc.nvim'    "  {{{
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 let g:coc_global_extensions = [
             \ 'coc-sh',
             \ 'coc-python',
@@ -206,10 +204,6 @@ let g:coc_filetype_map = { 'yaml.ansible': 'y*ml', }
 " Remap for format selected region
 "xmap <leader>f  <Plug>(coc-format-selected)
 "nmap <leader>f  <Plug>(coc-format-selected)
-" }}}
-
-"Plug 'Pablo1107/codi.vim', { 'branch': 'nvim-virtual-text' } "{{{
-"Plug 'Pablo1107/codi.vim' "{{{
 " }}}
 
 " https://github.com/fcpg/vim-showmap
