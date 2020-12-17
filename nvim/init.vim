@@ -210,7 +210,6 @@ let g:coc_filetype_map = { 'yaml.ansible': 'y*ml', }
 " Plug 'fcpg/vim-showmap'  "helps you type multi-char mappings
 
 Plug 'morhetz/gruvbox'           "{{{ Color theme gruvbox
-"Plug 'adrian5/oceanic-next-vim'
 "}}}
 call plug#end()
 "
@@ -228,9 +227,6 @@ set background=dark    " gruvbox dark
 " Adds correct highlighting of JSONC files
 "autocmd FileType json syntax match Comment +\/\/.\+$+
 
-"let g:oceanic_gutter_like_bg=0
-"let g:oceanic_bold = 0
-"colorscheme oceanicnext
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "{{{  CONFIGURATION
@@ -333,8 +329,8 @@ let g:netrw_localrmdir='rm -r'
 noremap  <leader>z  :terminal<CR>
 
 " Split managment
-map <silent> <A-s> :split<CR>   " Split horizontal, ALT-s
-map <silent> <A-v> :vsplit<CR>  " Split vertical, ALV-v
+"map <silent> <A-s> :split<CR>   " Split horizontal, ALT-s
+"map <silent> <A-v> :vsplit<CR>  " Split vertical, ALV-v
 "nnoremap <leader>v  :vsplit<CR>
 "nnoremap <leader>s  :split s <CR>
 
