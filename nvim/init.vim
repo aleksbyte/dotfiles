@@ -220,12 +220,11 @@ set background=dark    " gruvbox dark
 "let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_italic=1
 
-" nord theme
-"if (has("termguicolors"))
-"    set termguicolors
-"endif
+if (has("termguicolors"))
+    set termguicolors
+endif
 " Adds correct highlighting of JSONC files
-"autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -349,7 +348,3 @@ nnoremap <Leader>t :%s/\s\+$//<CR>:let @/=''<CR>:nohlsearch<CR>
 map <leader>- :e $HOME/.config/nvim/init.vim<CR>            " init.vim editing
 map <silent> <F1> :source $HOME/.config/nvim/init.vim<CR>   " source init.vim
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:lightline = {
-"\   'colorscheme': 'base16_gruvbox_light_soft'
-"\ }
