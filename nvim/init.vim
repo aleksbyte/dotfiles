@@ -19,7 +19,6 @@ filetype indent plugin on    " Format indentation
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{  PLUGINS
 " Use plug package manager
-
 " Install vim-plug if not found
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -28,7 +27,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 "    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 "
-
 call plug#begin()
 Plug 'itchyny/lightline.vim'     "{{{ Light and configurable statusline/tabline plugin.
 " }}}
@@ -101,7 +99,6 @@ nmap <Leader>gd :Gdiff<cr>
 "nmap <Leader>gm :Gcommit --amend<cr>
 "nmap <Leader>gp :Gpush<cr>
 "nmap <Leader>gw :Gwrite<cr>
-
 " }}}
 "Plug 'SirVer/ultisnips'          "{{{ Snippets plugin
 " Snippets are separated from the engine. Add this if you want them:
