@@ -118,7 +118,6 @@ fpath=($(brew --prefix)/share/zsh/functions \
        $(brew --prefix)/share/zsh/site-functions $fpath)
 #autoload bashcompinit && bashcompinit    # Enable bash completion
 #}}}
-
 #{{{# bindkey           #
 # Find the key with: showkey -a ?
 bindkey "^a"  beginning-of-line           # ctrl+a : move to beginning of line
@@ -133,7 +132,7 @@ bindkey "^u"  kill-whole-line             # ctrl+u : clear line
 #bindkey "[C"  forward-word
 #
 #}}}
-#{{{# prompt 
+#{{{# prompt            #
 #autoload -Uz vcs_info
 #precmd() { vcs_info }
 

@@ -28,6 +28,7 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
 alias sc='systemctl'
+alias jc='journalctl'
 alias jfk='journalctl -fk'
 alias jou='sudo journalctl -b -n 200 -f'
 
