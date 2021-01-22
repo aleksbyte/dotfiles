@@ -8,8 +8,8 @@ DST      :=$(HOME)
 XDG_CONFIG_HOME  :=$(DST)/.config
 XDG_DATA_HOME    :=$(DST)/.local/share
 
-basic:: zsh  nvim  ## zsh + nvim 
-work:: basic  vim tmux sshrc  ## zsh + nvim + vim + tmux + sshrc  
+basic:: zsh  tmux  ## zsh + tmux 
+work:: basic  nvim vim  ## zsh + tmux + nvim + vim
 
 zsh::  ## zsh cfg installation
 	if [ ! -d ${XDG_CONFIG_HOME}/zsh ]; \
@@ -22,6 +22,13 @@ zsh::  ## zsh cfg installation
 	fi;
 	ln -svf $(XDG_CONFIG_HOME)/zsh/.zshenv $(DST)/.zshenv
 	ln -svf $(XDG_CONFIG_HOME)/zsh/.zshrc $(DST)/.zshrc
+
+tmux::    ## tmux installations
+	if [ ! -d ${XDG_CONFIG_HOME}/tmux ]; \
+		then mkdir -p ${XDG_CONFIG_HOME}/tmux; fi;
+	cp -r ${SRC}/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux
+	rm -Rf ~/.tmux.conf
+	ln -svf ${XDG_CONFIG_HOME}/tmux/tmux.conf ~/.tmux.conf
 
 nvim::    ## neovim-cfg./plugins installations
 	if [ ! -d ${XDG_CONFIG_HOME}/nvim ]; \
@@ -41,19 +48,6 @@ vim::    ## vim-cfg installations
 	rm -Rf ~/.vimrc
 	ln -svf ${XDG_CONFIG_HOME}/vim/vimrc ~/.vimrc
 
-tmux::    ## tmux installations
-	if [ ! -d ${XDG_CONFIG_HOME}/tmux ]; \
-		then mkdir -p ${XDG_CONFIG_HOME}/tmux; fi;
-	cp -r ${SRC}/tmux/tmux.conf ${XDG_CONFIG_HOME}/tmux
-	rm -Rf ~/.tmux.conf
-	ln -svf ${XDG_CONFIG_HOME}/tmux/tmux.conf ~/.tmux.conf
-
-sshrc::    ## sshrc installations
-	if [ ! -d ${XDG_CONFIG_HOME}/sshrc ]; \
-		then mkdir -p ${XDG_CONFIG_HOME}/sshrc; fi;
-	cp -r ${SRC}/sshrc/sshrc ${XDG_CONFIG_HOME}/sshrc
-	mkdir -p ${XDG_CONFIG_HOME}/sshrc/sshrc.d
-	ln -svf ${XDG_CONFIG_HOME}/vim/vimrc ${XDG_CONFIG_HOME}/sshrc/sshrc.d/.vimrc
 
 header:
 	@echo ""

@@ -29,8 +29,8 @@ endif
 "
 call plug#begin()
 Plug 'itchyny/lightline.vim'     "{{{ Light and configurable statusline/tabline plugin.
-" }}}
 Plug 'mark-westerhof/vim-lightline-base16'
+" }}}
 Plug 'skywind3000/asyncrun.vim'  "{{{ enable you to run shell commands in background
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr> " run make
 nnoremap <F5> :call <SID>compile_and_run()<CR>
@@ -297,7 +297,8 @@ set listchars=tab:▸\ ,nbsp:␣,trail:·  "Define chars for 'list'
 "set list listchars=tab:▸\ ,eol:¬
 " Set filetype tab settings
 autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yml,yaml set ts=2 sts=2 sw=2 expandtab
+" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " }}}
 "
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
