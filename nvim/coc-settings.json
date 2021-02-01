@@ -45,5 +45,16 @@
         "https://json.schemastore.org/ansible-role-2.9": "yaml.ansible",
         "https://json.schemastore.org/ansible-collection-galaxy": "yaml.ansible"
     }
+    "languageserver": {
+        "terraform": {
+            "command": "terraform-lsp",
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {}
+        }
+    }
 }
 
