@@ -8,7 +8,6 @@
 # Global Aliases  - ZSH global aliases for piping
 #
 alias -g C='| wc -l'
-alias -g X='| xargs'
 alias -g H='| head'
 alias -g T='| tail'
 alias -g L='| less'
@@ -62,11 +61,13 @@ alias ll='ls -alhF'
 alias lt='ls -ltr'           #  Sort by date, most recent last.
 alias lk='ls -lSr'           #  Sort by size, biggest last.
 if [[ -x /usr/local/bin/exa ]]; then
+   # Changing "ls" to "exa"
    alias l='exa -F --group-directories-first'
-   alias ls='exa -F --group-directories-first'
-   alias la='exa -aF --group-directories-first'
-   alias ll='exa -al --git --group-directories-first'
-   alias let='exa -T'
+   alias l.='exa -a | egrep "^\."'
+   alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+   alias la='exa -aF --color=always --group-directories-first'  # all files and dirs
+   alias ll='exa -al --git --color=always --group-directories-first'  # long format
+   alias lt='exa -aT --color=always --group-directories-first' # tree listing
 fi
 # Tree
 alias tt="tree -L 2 -aC -I '.git |.DS_Store'"
@@ -84,6 +85,7 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # alias Ansible
 alias ans='ansible'
+alias ap='ansible-playbook'
 alias anp='ansible-playbook'
 alias anv='ansible-vault --ask-vault-pass'
 alias and='ansible-doc'

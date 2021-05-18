@@ -28,8 +28,10 @@ fi
 # History command configuration
 HIST_STAMPS="mm/dd/yyyy"
 HISTFILE="$ZSH_CACHE/zhistory"
-HISTSIZE=16384                 # size of the run-time history list
-SAVEHIST=16384
+#export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+#export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTSIZE=16384                   # Maximum events for internal history
+export SAVEHIST=16384                   # Maximum events in history file
 export CLICOLOR=1
 # set -o vi                      # vi mode
 set -o emacs                   # emacs mode
@@ -45,6 +47,12 @@ setopt hist_verify             # show com.with history expansion before running 
 setopt hist_find_no_dups       # Don't cycle through dupes
 setopt hist_reduce_blanks      # Trim multiple blanks in history
 setopt no_case_glob            # set ignore case for ls etc
+
+
+
+
+
+
 #
 setopt PUSHD_IGNORE_DUPS       # Don't duplicate dirs to the push/pop list
 setopt auto_cd                 # automatically enter directories without cd
@@ -84,6 +92,7 @@ if [[ -n $ZSH_CACHE/zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C -i
 fi
+
 setopt COMPLETE_IN_WORD # Allow completion from within a word/phrase
 setopt ALWAYS_TO_END    # When completing from the middle of a word, move cursor to end of word
 setopt MENU_COMPLETE    # When using auto-complete, put the first option on the line immediately
@@ -131,6 +140,12 @@ bindkey "^u"  kill-whole-line             # ctrl+u : clear line
 #bindkey "[D"  backward-word
 #bindkey "[C"  forward-word
 #
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+bindkey -M vicmd v edit-command-line
+
+#
 #}}}
 #{{{# prompt            #
 #autoload -Uz vcs_info
@@ -158,6 +173,16 @@ prompt pure
 #
 #}}}
 #{{{# fzf               #
+#
+## use rg for fzf
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob \!.git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+# export FZF_DEFAULT_OPTS="--ansi"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+#
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #}}}
 

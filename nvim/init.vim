@@ -19,6 +19,7 @@ filetype indent plugin on    " Format indentation
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{  PLUGINS
 " Use plug package manager
+
 " Install vim-plug if not found
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -27,10 +28,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 "    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 "
+
 call plug#begin()
 Plug 'itchyny/lightline.vim'     "{{{ Light and configurable statusline/tabline plugin.
-Plug 'mark-westerhof/vim-lightline-base16'
 " }}}
+Plug 'mark-westerhof/vim-lightline-base16'
 Plug 'skywind3000/asyncrun.vim'  "{{{ enable you to run shell commands in background
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr> " run make
 nnoremap <F5> :call <SID>compile_and_run()<CR>
@@ -57,7 +59,7 @@ let g:asyncrun_open = 15
 " }}}
 Plug 'Yggdroot/indentLine'       "{{{ Better Visual Guide
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_char = '¦'
+let g:indentLine_char = '┊'
 "let g:indentLine_color_gui='#363232'
 "let g:indentLine_color_term = 239
 " }}}
@@ -99,6 +101,7 @@ nmap <Leader>gd :Gdiff<cr>
 "nmap <Leader>gm :Gcommit --amend<cr>
 "nmap <Leader>gp :Gpush<cr>
 "nmap <Leader>gw :Gwrite<cr>
+
 " }}}
 "Plug 'SirVer/ultisnips'          "{{{ Snippets plugin
 " Snippets are separated from the engine. Add this if you want them:
@@ -141,7 +144,10 @@ au BufRead,BufNewFile *inventory*.yml set   filetype=yaml.ansible
 "}}}
 "
 Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting"
-"
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'   " 
+
+
 "  Plug 'iamcco/markdown-preview.nvim'       {{{     MarkdownPreview
 "Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
 "  https://github.com/iamcco/markdown-preview.nvim
@@ -185,13 +191,18 @@ augroup END
 "call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
 "packadd nvim-lspconfig
 
+
+"https://www.chrisatmachine.com/Neovim/04-vim-coc/
+
+
 "Plug 'neoclide/coc.nvim'    "  {{{
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 let g:coc_global_extensions = [
+            \ 'coc-tsserver',
+            \ 'coc-vimlsp',
             \ 'coc-sh',
             \ 'coc-python',
             \ 'coc-snippets',
-            \ 'coc-vimlsp',
             \ 'coc-git',
             \ 'coc-json',
             \ 'coc-yaml',
@@ -297,8 +308,8 @@ set listchars=tab:▸\ ,nbsp:␣,trail:·  "Define chars for 'list'
 "set list listchars=tab:▸\ ,eol:¬
 " Set filetype tab settings
 autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
-autocmd FileType yml,yaml set ts=2 sts=2 sw=2 expandtab
-" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yml setlocal ts=2 sts=2 sw=2 expandtab
 " }}}
 "
 "}}}  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

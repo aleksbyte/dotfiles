@@ -6,9 +6,9 @@
     "diagnostic.infoSign": "○",
     "diagnostic.hintSign": ".",
 
-    "git.addedSign.text": "┃",
-    "git.removedSign.text": "┃",
-    "git.changedSign.text": "┃",
+    "git.addedSign.text": "+",
+    "git.removedSign.text": "-",
+    "git.changedSign.text": "~",
     "git.changeRemovedSign.text": "┃",
 
     "languageserver": {
@@ -28,7 +28,7 @@
     "python.linting.flake8Args": ["--max-line-length=100"],
     "python.formatting.provider": "black",
     "python.linting.mypyEnabled": true,
-    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pydocstyleEnabled": false,
 
     // Snippets
     "snippets.userSnippetsDirectory": "~/.config/ultisnips",
@@ -44,17 +44,6 @@
         "https://json.schemastore.org/ansible-playbook": "yaml.ansible",
         "https://json.schemastore.org/ansible-role-2.9": "yaml.ansible",
         "https://json.schemastore.org/ansible-collection-galaxy": "yaml.ansible"
-    }
-    "languageserver": {
-        "terraform": {
-            "command": "terraform-lsp",
-            "filetypes": [
-                "terraform",
-                "tf"
-            ],
-            "initializationOptions": {},
-            "settings": {}
-        }
     }
 }
 

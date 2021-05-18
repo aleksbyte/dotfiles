@@ -1,5 +1,11 @@
 # Alex's dotfiles
 
+
+... fresh installation of macOS:
+
+sudo softwareupdate -i -a
+xcode-select --install
+
 ## Features
 
 Dotfiles for a workflow which focuses on:
