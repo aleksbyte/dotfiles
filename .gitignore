@@ -1,0 +1,16 @@
+# General
+.DS_Store
+._*
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+.apdisk
+Network Trash Folder
+Temporary Items
+
+# Compiled Python files .. Vim
+*.pyc
+*.swp
+
+

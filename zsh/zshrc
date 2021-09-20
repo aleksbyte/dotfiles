@@ -1,0 +1,277 @@
+#!/usr/bin/env zsh
+#{{{# Zgen              #
+ZSH_DISABLE_COMPFIX=true
+# automatically run `zgen reset` if we modify our .zshrc
+ZGEN_RESET_ON_CHANGE=("${HOME}/.zshrc")
+
+[[ -z $XDG_DATA_HOME ]] && echo 'data home not set' && return
+if [[ ! -f $XDG_DATA_HOME/zsh/zgen/zgen.zsh ]]; then
+  echo " ** zgen not found **"
+  echo "Making $XDG_DATA_HOME/zsh if it doesn't exist..."
+  mkdir -p $XDG_DATA_HOME/zsh
+  echo "Downloading zgen..."
+  git clone https://github.com/tarjoilija/zgen.git $XDG_DATA_HOME/zsh/zgen
+fi
+ZGEN_AUTOLOAD_COMPINIT=1
+source $XDG_DATA_HOME/zsh/zgen/zgen.zsh
+#
+if ! zgen saved; then
+    echo "Creating a zgen save"
+    # oh-my-zsh
+    zgen oh-my-zsh
+    # oh my zsh plugins
+    zgen oh-my-zsh plugins/osx
+#    zgen oh-my-zsh plugins/git
+#    zgen oh-my-zsh plugins/aws
+    zgen oh-my-zsh plugins/web-search
+    # Automatically run zgen update and zgen selfupdate every 7 days
+    zgen load unixorn/autoupdate-zgen
+    zgen load BurntSushi/ripgrep complete
+    zgen load zsh-users/zsh-completions src
+    zgen load zsh-users/zsh-autosuggestions
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
+    zgen load mafredri/zsh-async
+    zgen load sindresorhus/pure
+    zgen save
+fi
+#}}}
+# get direnv working with zsh https://github.com/direnv/direnv/issues/64
+# eval "$(direnv hook $SHELL)"
+#eval "$(direnv hook /opt/homebrew/bin/zsh)"
+# Source the asdf version manager asdf.sh dependency
+#. $(brew --prefix asdf)/asdf.sh
+#########################################
+#   #}}}
+#   #{{{# Options           #
+# Zsh options
+# Changing directories
+setopt auto_cd                       # Change directory without having to write cd.
+# Completion
+setopt always_to_end                 # Move the cursor to the end of the completion.
+setopt auto_remove_slash             # Strip trailing slashes of completions.
+setopt complete_in_word              # Complete even if the cursor in not at the end.
+setopt list_packed                   # More compact completion lists.
+setopt list_types                    # Show types in completion.
+unsetopt rec_exact                   # Recognize exact, ambiguous matches.
+# Expansion and Globbing
+setopt extended_glob                 # Use regex in filename generation.
+setopt nomatch                       # If there is no match, print an error.
+# History command configuration
+export HISTSIZE=32768                # Maximum events for internal history
+export SAVEHIST=32768                # Maximum events in history file
+HIST_STAMPS="mm/dd/yyyy"
+HISTFILE="$ZSH_CACHE/zhistory"
+# setopt share_history
+setopt append_history                # Append to history, not overwrite. This way multiple sessions have the same history.
+setopt extended_history              # Save additional metadata to history file.
+setopt inc_append_history            # Append commands to history immediately.
+setopt hist_expire_dups_first  # del duplic..s first when HISTFILE size HISTSIZE
+setopt hist_ignore_dups        # ignore duplicated commands history list
+setopt hist_ignore_space       # ignore commands that start with space
+setopt hist_ignore_all_dups    # Remove the old entry and append the new one
+setopt hist_verify             # show com.with history expansion before running it
+setopt hist_find_no_dups       # Don't cycle through dupes
+setopt hist_reduce_blanks      # Trim multiple blanks in history
+setopt no_case_glob            # set ignore case for ls etc
+#
+# Input/Output
+setopt correct                       # Command correction.
+setopt dvorak                        # Correct dvorak typing mistakes.
+unsetopt flow_control                # Disable flow control since I am a new kid.
+setopt short_loops                   # Allow for short forms of for, repeat, select, if and function constructs.
+# Job Control
+setopt notify                        # Report the status on background jobs immediately.
+# Prompting
+setopt prompt_subst                  # Command substitution and arithmetic expansion.
+# Zle (Zsh line editor)
+unsetopt beep                        # Disable beep.
+#
+export ZSH_THEME="gruvbox"
+#   SOLARIZED_THEME="dark"
+# set -o vi                      # vi mode
+# set -o emacs                   # emacs mode
+#
+#   setopt PUSHD_IGNORE_DUPS       # Don't duplicate dirs to the push/pop list
+#   setopt auto_menu               # Use menu completion after the second completion reques    t
+#   setopt auto_pushd              # Makes cd, pushd (cd +1, cd -1)
+#   setopt always_to_end           # .. move the cursor to the end of the word
+#   setopt complete_in_word        # Only complete when completion is confirmed
+#   setopt correct                 # Try to autocorrect command
+#   setopt interactive_comments    # Allow comments even in interactive shells
+#   setopt local_options           # Allow functions to have local options
+#   setopt local_traps             # Allow functions to have local traps
+#   setopt menu_complete           # show completion on first tab
+#   setopt multios                 # Allow multiple input/output redirection
+#   setopt nohup                   # Don't kill background jobs on logout
+#   setopt prompt_subst            # Enable parameter expansion, command substitution, etc.
+#   setopt prompt_cr               # prompt always at beginning of line
+#   setopt nonomatch               # Escape URL's special chars (eg.: ?)
+setopt no_list_beep            # Don't beep on an ambiguous completion
+#   unsetopt correct_all           # Don't try to autocorrect all arguments
+#   # Globbing
+setopt NO_CASE_GLOB            # Case insensitive globbing
+setopt EXTENDED_GLOB           # Allow the powerful zsh globbing features, see link:
+setopt NUMERIC_GLOB_SORT       # Sort globs that expand to numbers numerically, not by letter (i.e. 01 2 03)
+#   #}}}
+#############################################################
+#   #{{{# Completion        #
+#
+# Caching autocompletion
+#autoload -Uz compinit
+#   #if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n $ZSH_CACHE/zcompdump(#qN.mh+24) ]]; then
+     compinit -i
+else
+     compinit -C -i
+fi
+#
+setopt COMPLETE_IN_WORD # Allow completion from within a word/phrase
+setopt ALWAYS_TO_END    # When completing from the middle of a word, move cursor to end of word
+setopt MENU_COMPLETE    # When using auto-complete, put the first option on the line immediately
+setopt COMPLETE_ALIASES # Turn on completion for aliases as well
+setopt LIST_ROWS_FIRST  # Cycle through menus horizontally instead of vertically
+#   #
+#   # Automatically list choices on ambiguous completion
+setopt auto_list
+#   # Automatically use menu completion
+setopt auto_menu
+#   # Move cursor to end if word had one match
+setopt always_to_end
+#   # Menu-like autocompletion selection
+zmodload -i zsh/complist
+#   # Select completions with arrow keys
+zstyle ':completion:*' menu select
+#   # Group results by category
+zstyle ':completion:*' group-name ''
+#   # Enable approximate matches for completion
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate
+#   # Case and hyphen insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+#   # Use caching so that commands like apt and dpkg complete are useable
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE
+   # Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat     {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+#   #
+#   # Add functions folder to $fpath array
+fpath=($(brew --prefix)/share/zsh/functions \
+       $(brew --prefix)/share/zsh-completions \
+       $fpath)
+autoload bashcompinit && bashcompinit    # Enable bash completion
+
+# github gh completion
+# gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh.zsh
+compctl -K _gh gh
+
+
+# Completion
+# fpath=(~/.zsh/completion $fpath)
+# autoload -Uz compinit && compinit
+# SSH hosts completion
+#[ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
+#[ -f ~/.ssh/known_hosts ] && : ${(A)ssh_known_hosts:=${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*}}
+#zstyle ':completion:*:*:*' hosts $ssh_config_hosts $ssh_known_hosts
+#   #}}}
+#############################################################
+#   #{{{# bindkey           #
+ # Keybindings -v-
+bindkey -v # I want vi mode to be enabled for Zle.
+#   # Vi with some Emacs flavor control keys.
+#   bindkey -v
+#   # Find the key with: showkey -a ?
+bindkey "^a"  beginning-of-line           # ctrl+a : move to beginning of line
+bindkey "^e"  end-of-line                 # ctrl+e : move to end of line (e for end)
+bindkey '^b'  backward-word               # ctrl+b : move to previous word (b for backward)
+bindkey '^f'  forward-word                # ctrl+f : move to next word (f for forward)
+#   #bindkey "^k"  vi-kill-eol                 # ctrl+k : delete from character to end of line
+bindkey "^k"  kill-line                   # ctrl+k : delete from character to end of line
+bindkey "^u"  kill-whole-line             # ctrl+u : clear line
+bindkey "^w" backward-kill-word
+bindkey "^l" clear-screen
+bindkey "^y" yank
+#   # ⌥ + ← or → - move one word backward/forward ?
+#   #bindkey "[D"  backward-word
+#   #bindkey "[C"  forward-word
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+bindkey -M vicmd v edit-command-line
+#   #}}}
+#############################################################
+#   #{{{# prompt            #
+#   #autoload -Uz vcs_info
+#   #precmd() { vcs_info }
+#
+#   # Format the vcs_info_msg_0_ variable
+#   #zstyle ':vcs_info:git:*' formats 'on branch %b'
+#   # Set up the prompt (with git branch name)
+#   #setopt PROMPT_SUBST
+#   #PROMPT='%n in ${PWD/#$HOME/~} > '
+#   #RPROMPT=\$vcs_info_msg_0_
+#
+#   ##PURE_GIT_DOWN_ARROW=⇣
+#   ##PURE_GIT_UP_ARROW=⇡
+#   ##export GIT=''
+#   export GIT=''
+PURE_GIT_DOWN_ARROW='▼'
+PURE_GIT_UP_ARROW='▲'
+PURE_GITSTASH_SYMBOL='■'
+#
+#   # turn on git stash status
+autoload -U promptinit; promptinit
+#autoload -U promptinit
+zstyle :prompt:pure:git:stash show yes
+prompt pure
+
+# Use Starship Prompt
+# https://github.com/starship/starship'
+#export STARSHIP_CONFIG=~/.starship.toml
+#eval "$(starship init $SHELL)"
+#   #}}}
+#############################################################
+#{{{# fzf               #
+# Alt + c - change directory from fzf
+# Ctrl + r - search through bash history with fzf
+# Ctrl + t - insert file from fzf into command
+# Ctrl + p - edit a file in vim from fzf ???
+# mv dir/** - expand a directory with (**) and select from fzf
+#
+## use rg for fzf
+# export FZF_DEFAULT_COMMAND="rg --files --hidden --glob \!.git"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+# export FZF_DEFAULT_OPTS="--ansi"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+if type rg &> /dev/null; then
+#  export FZF_DEFAULT_COMMAND='rg --files'
+#  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+#  export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+#  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+#  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+#
+## FZF things
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#export FZF_DEFAULT_COMMAND='rg --files --smart-case'
+#export FZF_CTRL_T_COMMAND='rg --files --smart-case'
+#export FZF_DEFAULT_OPTS="--height 40% --reverse"
+## Preview files (but not everything else) with bat
+#export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS \
+#    --preview 'bat --color=always --line-range=:40 --style=numbers,changes {}'"
+#
+# use rg for fzf
+   export FZF_DEFAULT_COMMAND="rg --files --hidden --glob \!.git"
+   export FZF_DEFAULT_OPTS='-m --height 50% --border'
+#   bindkey ^p vim $(fzf)  ???
+fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#   #}}}
+#
+[ -f ${XDG_CONFIG_HOME}/zsh/alias ] && source ${XDG_CONFIG_HOME}/zsh/alias
+[ -f ${HOME}/.localrc ] && source ${HOME}/.localrc
+#
+typeset -U PATH
+if [[ "$(uname -m)" == "arm64" ]]; then
+    export PATH="/opt/homebrew/bin:${PATH}"
+fi

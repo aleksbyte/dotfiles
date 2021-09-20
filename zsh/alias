@@ -1,0 +1,125 @@
+#!/opt/homebrew/bin/zsh
+# Global Aliases
+# Suffix Aliases
+# Functions for Aliases With Parameters
+# Simple Aliases
+# OS/host specific aliases ~~~> ~/.localrc
+
+# Global Aliases  - ZSH global aliases for piping
+#
+alias -g C='| wc -l'
+alias -g H='| head'
+alias -g T='| tail'
+alias -g L='| less'
+alias -g S='| sort'
+alias -g G='| grep --color=auto -E' ######
+alias -g R='| rg'
+alias -g F='| fzf'
+alias -g S='| sort' ###
+alias -g T='| tail' ###
+alias -g LL="2>&1 | less"
+alias -g CA="2>&1 | cat -A"
+alias -g N='> /dev/null'
+alias -g NN='> /dev/null 2>&1'
+alias -g NUL='&> /dev/null'
+alias -g J='| jq -C .'
+alias -g JP='| python -m json.tool'
+alias -g CD='&& $_'
+alias -g X='| xargs'
+alias -g X1='| xargs -n 1'
+alias -g XL='| tr "\n" "\0" | xargs -0'
+alias -g W='| wc -l' ####
+alias -g V='| nvim -'
+alias -g 21="2>&1"
+#
+# Suffix Aliases  - Example ZSH clever aliases
+#
+alias -s {txt,yml,yaml}=nvim
+alias -s {md,json,html}=code
+#
+# Functions for Aliases With Parameters
+#
+mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"}    # Create directory and move into
+cl()  { cd "$@" && ls -CF }                         # cd to a directory and ls
+cdl() { cd "$@" && ls -CF }                         # cd to a directory and ls
+dict() { open dict:///"$@" ; }                      # macOS dict. appl.
+#
+# Simple Aliases
+#
+alias .='pwd'
+alias ~="cd ~/"
+alias ..="cd .."
+alias c='clear'                  # Clear terminal display
+alias h='history'
+alias m='make'                   #
+alias v='nvim'                   #
+# lists
+alias l='ls -AF'                 # Compact view, show hidden
+alias l.='ls -d .* '
+alias ll='ls -alhF'
+alias lt='ls -ltr'           #  Sort by date, most recent last.
+alias lk='ls -lSr'           #  Sort by size, biggest last.
+#if [[ -x /usr/local/bin/exa ]]; then
+if [[ -x /opt/homebrew/bin/exa ]]; then
+   # Changing "ls" to "exa"
+   alias l='exa -F --group-directories-first'
+   alias l.='exa -a | egrep "^\."'
+   alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+   alias la='exa -aF --color=always --group-directories-first'  # all files and dirs
+   alias ll='exa -al --git --color=always --group-directories-first'  # long format
+   alias lt='exa -aT --color=always --group-directories-first' # tree listing
+fi
+# Tree
+alias tt="tree -L 2 -aC -I '.git |.DS_Store'"
+alias ttt="tree -L 3 -aC -I '.git |.DS_Store'"
+alias tre='tree -Ca'        # nice alternative to 'ls'
+# Finding stuff!
+# alias fd='find . -type d -name'
+# alias ff='find . -type f -name'
+ff() { find . -type f -name "*$1*" -print }
+ffmin() { find . -type f -size +$1; }
+ffmax() { find . -type f -size -$1; }
+#
+alias df='df -kh'
+alias f='open -a Finder ./'      # Opens current directory in MacOS Finder
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# alias Ansible
+alias ans='ansible'
+alias ap='ansible-playbook'
+alias anp='ansible-playbook'
+alias anv='ansible-vault --ask-vault-pass'
+alias and='ansible-doc'
+alias ang='ansible-galaxy'
+alias anl='ansible-lint'
+
+# alias for Terraform  
+alias tf='terraform'
+alias tp='terraform plan'
+alias ta='terraform apply'
+alias ti='terraform init'
+
+# Git aliases  ->  aliases from ohmyzsh git plugin in .zshrc
+#alias g="git"
+#alias ga="git add"
+#alias gd="git diff"
+#alias gl="git pull"
+#alias gp="git push"
+#alias gst="git status"
+#alias gcmsg="git commit -m"
+#alias glog="git log --oneline --decorate --color --graph"
+
+# Tmux aliases
+alias tm='TERM=xterm-256color tmux'
+alias tn='tmux new-session -s'                   # tmux new session
+alias ta='tmux attach -t'                        # tmux attach
+alias tl='tmux ls'                               # list
+alias tk='tmux kill-session -s'                  # kill session name
+alias td="tmux detach"
+alias tmux='TERM=xterm-256color tmux'
+
+#
+alias rsync='rsync --progress'
+alias ports='netstat -tulanp'
+alias ports-listen='sudo lsof -nP -iTCP -sTCP:LISTEN'
+

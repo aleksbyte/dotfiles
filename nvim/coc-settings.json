@@ -1,0 +1,47 @@
+{
+    "diagnostic.checkCurrentLine": false,
+    "diagnostic.enable": true,
+    "diagnostic.warningSign": "●",
+    "diagnostic.errorSign": "●",
+    "diagnostic.infoSign": "○",
+    "diagnostic.hintSign": ".",
+
+    "git.addedSign.text": "+",
+    "git.removedSign.text": "-",
+    "git.changedSign.text": "~",
+    "git.changeRemovedSign.text": "┃",
+
+    "languageserver": {
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh, zsh"],
+            "ignoredRootPaths": ["~"]
+        }
+    },
+
+    // Python
+    "python.jediEnabled": false,
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=100"],
+    "python.linting.mypyEnabled": true,
+    "python.linting.pydocstyleEnabled": false,
+
+    // YAML
+    "yaml.validate": true,
+    "yaml.completion": true,
+    "yaml.format.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.trace.server": "verbose",
+    "yaml.schemas": {
+        "https://json.schemastore.org/ansible-inventosy": "yaml.ansible",
+        "https://json.schemastore.org/ansible-playbook": "yaml.ansible",
+        "https://json.schemastore.org/ansible-role-2.9": "yaml.ansible",
+        "https://json.schemastore.org/ansible-collection-galaxy": "yaml.ansible",
+        "https://json.schemastore.org/gitlab-ci": "/*lab-ci.yml"
+    }
+}
+

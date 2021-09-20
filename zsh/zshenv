@@ -1,0 +1,78 @@
+############################################################################
+# XDG  Base Directory Specification
+# See https://specifications.freedesktop.org/basedir-spec/latest/
+[ "$XDG_CONFIG_HOME" ] || export XDG_CONFIG_HOME="$HOME/.config"
+[ "$XDG_CACHE_HOME" ]  || export XDG_CACHE_HOME="$HOME/.cache"
+[ "$XDG_DATA_HOME" ]   || export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_BIN_HOME=$HOME/.local/bin
+export XDG_LIB_HOME=$HOME/.local/lib
+export XDG_ETC_HOME=$HOME/.local/etc
+# ====== ZSH Specific variables =========
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export ZGEN_DIR="$XDG_DATA_HOME/zsh/zgen"
+export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
+export HISTFILE=$ZSH_CACHE/zhistory
+export COMPDUMPFILE=$ZSH_CACHE/zcompdump
+#
+# Typeset options
+typeset -g -A key                    # Make the associative array key global.
+typeset -U path cdpath fpath manpath # Remove duplicates in the following arrays.
+#
+# Paths
+path=(
+  $HOME/bin
+  $HOME/.local/bin
+  /opt/homebrew/{bin,sbin}
+  /usr/local/{bin,sbin}
+  /usr/{bin,sbin}
+  /{bin,sbin}
+)
+export PATH
+#
+manpath=(
+    /opt/homebrew/manpages
+    /opt/homebrew/share/man
+    /usr/local/share/man
+    /usr/share/man
+)
+manpath=($manpath)
+#
+export LANG=en_US.UTF-8
+export LANGUAGE=en
+export LC_ALL="${LANG}"
+export LC_CTYPE='en_US.UTF-8'
+export TERM="xterm-256color"
+
+export CLICOLOR=1
+#export LSCOLORS=BxGxcxdxCxegDxabagacad
+export LSCOLORS=Gxfxcxdxbxegedabagacad   # ls colors
+
+# Editor / pager
+test -n "$(command -v nvim)" && EDITOR=vi || EDITOR=nvim
+export EDITOR
+#
+if test -n "$(command -v less)" ; then
+#    PAGER="less -FirSwX"
+#    MANPAGER="less -FiRswX"
+#    LESS=-RX      # -X: don't clear screen before and after less
+     export PAGER=less
+     export LESSHISTFILE=/tmp/.lesshst
+     export LESSKEY=/tmp/.lesskey
+     export LESS=RWXij2
+     export LESS=${LESS}"Ps?f%f .?m(%i/%m) .%lt-%lb?L/%L. [%bB?B/%B.]?B %pB\%.?x N\:%x.%t"
+else
+    PAGER=more
+    MANPAGER="$PAGER"
+fi
+
+export PAGER MANPAGER
+export VISUAL=$EDITOR
+#
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # ctrl-w
+# NVIM
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_PYTHON_LOG_FILE=/tmp/log
+export NVIM_PYTHON_LOG_LEVEL=DEBUG
+#
+export CHEAT_USE_FZF=true
