@@ -7,9 +7,9 @@
 
 vim.cmd('source ~/.config/nvim/lua/from_init.vim')
 
-require('plugins')       -- plugins
 require('settings')      -- settings
-require('keybindings')   -- keybindings
+require('keymaps')       -- keymaps
+require('plugins')       -- plugins
 require('statusline')    -- statusline
-require('utils')         -- lua/utils.lua
+require('utils')         -- utils.lua
 --

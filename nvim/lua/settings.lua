@@ -91,15 +91,10 @@ o.wildignore = [[
 *.eot,*.otf,*.ttf,*.woff
 *.doc,*.pdf,*.cbr,*.cbz
 *.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
-*.swp,.lock,.DS_Store,._*
-*.pyc
+*.swp,.lock,.DS_Store,._*,*.pyc,*.bak,*~
 *.gem
-*.bak,*~,*.swp,*.lock
 *.o,*.lo,*.ko,*.so
-*.svn/*
 *_build/*,*build/*
-*target/*
-*coverage/*
 *.egg,*.egg-info
 *.ps,*.bbl,*.docx,*.ppt,*.pptx,*.rtf
 ]]

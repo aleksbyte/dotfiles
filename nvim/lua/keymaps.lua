@@ -1,4 +1,4 @@
---- keybindings.lua
+--- keymaps.lua
 -----------------------------------------------------------
 -- https://github.com/ashincoder/StarVim/blob/main/lua/core/keybindings/init.lua
 --
@@ -56,3 +56,13 @@ map("n", "<C-e>", "<End>",  options)
 --  noremap <Leader>t :%s/\s\+$//<CR>:let @/=''<CR>:nohlsearch<CR>
 --
 --
+-----------------------------------------------------------
+-- Plugins shortcuts:
+-----------------------------------------------------------
+-- nvim-tree
+-- map('n', '<C-n>', ':NvimTreeToggle<CR>', default_opts)       -- open/close
+-- map('n', '<leader>r', ':NvimTreeRefresh<CR>', default_opts)  -- refresh
+-- map('n', '<leader>n', ':NvimTreeFindFile<CR>', default_opts) -- search file
+
+-- Vista
+-- map('', '<C-m>', ':Vista<CR>', default_opts)  -- open/close vista window
