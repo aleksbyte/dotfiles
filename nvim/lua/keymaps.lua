@@ -1,14 +1,9 @@
 --- keymaps.lua
 -----------------------------------------------------------
--- https://github.com/ashincoder/StarVim/blob/main/lua/core/keybindings/init.lua
 --
 -- Map leader default '\'
 --
--- vim.g.mapleader = ' '   -- 'vim.g' sets global variables
--- vim.g.mapleader = '\ '  -- 'vim.g' sets global variables
---
 local map = vim.api.nvim_set_keymap
--- map mapleader = '\ '  -- 'vim.g' sets global variables
 local options = { noremap = true }
 local defaults = {noremap = true, silent = true}
 --
@@ -49,20 +44,4 @@ map("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", options) -- Prev Tab
 -- Bash like
 map("n", "<C-a>", "<Home>", options)
 map("n", "<C-e>", "<End>",  options)
--- map("i", "<C-d>", "<Delete>", options)
 --
--- map('n', '<leader>t', ':%s/\s\+$//<cr>:let @/=''<cr>:nohlsearch<cr>', options)
--- " <Leader>T = Delete all Trailing space in file
---  noremap <Leader>t :%s/\s\+$//<CR>:let @/=''<CR>:nohlsearch<CR>
---
---
------------------------------------------------------------
--- Plugins shortcuts:
------------------------------------------------------------
--- nvim-tree
--- map('n', '<C-n>', ':NvimTreeToggle<CR>', default_opts)       -- open/close
--- map('n', '<leader>r', ':NvimTreeRefresh<CR>', default_opts)  -- refresh
--- map('n', '<leader>n', ':NvimTreeFindFile<CR>', default_opts) -- search file
-
--- Vista
--- map('', '<C-m>', ':Vista<CR>', default_opts)  -- open/close vista window

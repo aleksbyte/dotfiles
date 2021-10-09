@@ -28,11 +28,40 @@ Plug 'jiangmiao/auto-pairs'          " Insert or delete brackets, parens, quotes
 Plug 'junegunn/fzf',{'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 
-"Plug 'airblade/vim-gitgutter'  " Shows a git diff in the 'gutter' (sign column).
-Plug 'tpope/vim-fugitive'      " :Git (or just :G), which calls any arbitrary Git command ..
+Plug 'SirVer/ultisnips'
 
-Plug 'pearofducks/ansible-vim'
-"Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
+"Plug 'SirVer/ultisnips'          " Snippets plugin
+" Snippets are separated from the engine. Add this if you want them:
+"Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsListSnippets="<C-l>"
+"let g:UltiSnipsJumpForwardTrigger="<C-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+"let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories  = ['codesnippets']
+" let g:UltiSnipsSnippetsDir = '~/.vim/codesnippets'
+" let g:UltiSnipsEditSplit = 'context'
+"nnoremap <Leader>es :UltiSnipsEdit<Cr>
+
+"https://2sang.github.io/journal/vim-snippets-management.html
+"Separate vim-snippets and your private snippets
+" Our personal snippets go into ~/dotfiles/user_snippets.
+" By defining this, ':UltiSnipsEdit' call opens new file at this location
+"let g:UltiSnipsSnippetsDir="~/dotfiles/user_snippets"
+
+" Add your private snippet path to runtimepath
+"set runtimepath^=~/dotfiles
+" When vim starts, Ultisnips tries to find snippet directories defined below, under the paths in runtimepath.
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "user_snippets"]
+
+"nnoremap <leader>es :UltiSnipsEdit<cr>
+
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"Plug 'pearofducks/ansible-vim'
+Plug 'pearofducks/ansible-vim', { 'do': './ultisnips/generate.sh' }
 "Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Completions and more using Coc
@@ -40,6 +69,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} "Completions and more using Coc
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 "
+"Plug 'airblade/vim-gitgutter'  " Shows a git diff in the 'gutter' (sign column).
+Plug 'tpope/vim-fugitive'      " :Git (or just :G), which calls any arbitrary Git command ..
+
 "Plug 'tpope/vim-repeat'
 "Plug 'pappasam/nvim-repl'
 "nnoremap <leader><leader>e :ReplToggle<CR>

@@ -15,14 +15,12 @@ local w = vim.wo        -- windows-scoped options
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
--- g.mapleader = ','           -- change leader to a comma
-o.mouse = 'a'               -- enable mouse support
-o.clipboard = 'unnamedplus' -- copy/paste to system clipboard
+
+-- o.mouse = 'a'               -- enable mouse support
 b.swapfile = false          -- don't use swapfile
 
 -- Neovim UI
 o.syntax = 'enable'         -- enable syntax highlighting
-w.number = true             -- show line number
 o.showmatch = true          -- highlight matching parenthesis
 w.foldmethod = 'marker'     -- enable folding (default 'foldmarker')
 w.colorcolumn = '80'        -- line lenght marker at 80 columns
@@ -31,8 +29,14 @@ o.splitbelow = true         -- orizontal split to the bottom
 o.ignorecase = true         -- ignore case letters when search
 o.smartcase = true          -- ignore lowercase for the whole pattern
 
-o.relativenumber = true           -- Relative line numbers
+w.number = true             -- show line number
+o.relativenumber = true     -- Relative line numbers
 w.cursorline = true
+
+-- assign unnamedplus register to clipboard
+-- anything in the clipboard can be pasted directly
+-- any yanked text will be copied to clipboard
+o.clipboard = 'unnamedplus' -- copy/paste to system clipboard
 
 -- remove whitespace on save
 cmd([[au BufWritePre * :%s/\s\+$//e]])
@@ -82,38 +86,16 @@ o.shortmess = 'c'       -- don't show completion messages
 -----------------------------------------------------------
 
 o.wildignore = [[
-.git/*,.hg,.svn
-*.aux,*.out,*.toc
+*.swp,.lock,.DS_Store,._*,*.pyc,*.bak,*~
+*.gem,*.o,*.lo,*.ko,*.so
+.git/*,.hg,.svn,*.aux,*.out,*.toc
 *.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class
 *.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp
 *.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg
 *.mp3,*.oga,*.ogg,*.wav,*.flac
-*.eot,*.otf,*.ttf,*.woff
-*.doc,*.pdf,*.cbr,*.cbz
+*.eot,*.otf,*.ttf,*.woff,*.doc,*.pdf,*.cbr,*.cbz
 *.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
-*.swp,.lock,.DS_Store,._*,*.pyc,*.bak,*~
-*.gem
-*.o,*.lo,*.ko,*.so
-*_build/*,*build/*
-*.egg,*.egg-info
+*_build/*,*build/*,*.egg,*.egg-info
 *.ps,*.bbl,*.docx,*.ppt,*.pptx,*.rtf
 ]]
-
------------------------------------------------------------
--- Colorscheme
------------------------------------------------------------
--- o.termguicolors = true          -- enable 24-bit RGB colors
--- vim.cmd 'colorscheme gruvbox'  -- https://github.com/gruvbox-community/gruvbox
---
--- cmd([[colorscheme molokai]])    -- set colorscheme
--- vim.cmd 'colorscheme molokai'    -- set colorscheme
--- cmd([[colorscheme spacegray]])    -- set colorscheme
--- vim.cmd 'colorscheme spacegray'    -- set colorscheme
--- cmd([[colorscheme wal]])    -- set colorscheme
--- cmd([[colorscheme monokai_pro]])    -- set colorscheme
--- vim.cmd 'colorscheme everforest.vim'  -- https://github.com/gruvbox-community/gruvbox
--- highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
--- cmd ([[ autocmd highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE ]])
--- cmd("hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE")
--- cmd("hi LineNr term=bold ctermfg=DarkGrey ctermbg=Red")
 

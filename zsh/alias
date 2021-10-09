@@ -64,7 +64,7 @@ if [[ -x /opt/homebrew/bin/exa ]]; then
    # Changing "ls" to "exa"
    alias l='exa -F --group-directories-first'
    alias l.='exa -a | egrep "^\."'
-   alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+   alias ls='exa -al --git --color=always --group-directories-first' # my preferred listing
    alias la='exa -aF --color=always --group-directories-first'  # all files and dirs
    alias ll='exa -al --git --color=always --group-directories-first'  # long format
    alias lt='exa -aT --color=always --group-directories-first' # tree listing
@@ -93,7 +93,7 @@ alias and='ansible-doc'
 alias ang='ansible-galaxy'
 alias anl='ansible-lint'
 
-# alias for Terraform  
+# alias for Terraform
 alias tf='terraform'
 alias tp='terraform plan'
 alias ta='terraform apply'
