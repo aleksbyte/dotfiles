@@ -4,7 +4,8 @@
 # Vars
 SRC := ${PWD}/files
 #DST := ${HOME}
-DST := ${HOME}/test
+#DST := ${HOME}/test
+DST := ${HOME}
 #
 XDG_CONFIG_HOME := ${DST}/.config
 XDG_DATA_HOME   := $(DST)/.local/share
@@ -38,8 +39,9 @@ tmux:    ## tmux installations
 nvim:    ## neovim-cfg/plugins installations
 	if [ ! -d ${XDG_CONFIG_HOME}/nvim ]; \
 		then mkdir ${XDG_CONFIG_HOME}/nvim; fi;
-	cp -r ${SRC}/nvim/init.vim ${XDG_CONFIG_HOME}/nvim
-	cp -r ${SRC}/nvim/coc-settings.json ${XDG_CONFIG_HOME}/nvim
+	cp  ${SRC}/nvim/init.vim ${XDG_CONFIG_HOME}/nvim
+	cp  ${SRC}/nvim/coc-settings.json ${XDG_CONFIG_HOME}/nvim
+	cp -r ${SRC}/nvim/colors ${XDG_CONFIG_HOME}/nvim
 #   	/usr/local/bin/pip3 install neovim
 #   	curl -fLo ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs \
 #   	   	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
