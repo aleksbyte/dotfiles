@@ -1,0 +1,30 @@
+---
+# defaults for dot configs
+#
+# XDG_CONFIG_HOME := ${DST}/.config
+# XDG_DATA_HOME   := $(DST)/.local/share
+#
+cfg_src: "{{ lookup('env','PWD') }} directory source for config files"
+home: "{{ lookup('env','HOME') }}"
+cfg_home: "{{ lookup('env','HOME') }}/.config"
+# DST for test:
+#cfg_home: "{{ lookup('env','HOME') }}/test/.config"
+#
+
+# Set to 'true' to configure zsh.
+configure_zsh: true
+
+# Set to 'true' to configure tmux.
+configure_tmux: true
+
+# Set to 'true' to configure vim.
+configure_vim: true
+#configure_vim: false
+
+# Set to 'true' to configure nvim.
+configure_nvim: true
+#configure_nvim: false
+
+# Set to 'true' to configure sshrc.
+configure_sshrc: false
+

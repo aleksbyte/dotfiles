@@ -1,0 +1,45 @@
+#- name: Install zsh config files
+- name: Create a directory if it does not exist.
+  ansible.builtin.file:
+    #    path: /Users/alx/test/zsh
+    path: "{{ cfg_home }}/zsh"
+    state: directory
+    owner: alx
+    mode: '0755'
+
+- name: Check directory.
+  stat:
+    #path: /Users/alx/test/zsh
+    path: "{{ cfg_home }}/zsh"
+  register: dst_folder
+
+- name: "echo if directory already existed"
+  debug:
+    msg: "the zsh config directory is already existed"
+  when: dst_folder.stat.exists
+
+# Copy files
+- name: Copy zsh config files.
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: alx
+    mode: u+rw,g+r,o+r,+x
+      #  with_items:
+  loop:
+    - { src: 'files/zsh/zshenv', dest: "{{ cfg_home }}/zsh" }
+    - { src: 'files/zsh/zshrc', dest: "{{ cfg_home }}/zsh/.zshrc" }
+    - { src: 'files/zsh/alias', dest: "{{ cfg_home }}/zsh" }
+
+## Linking files
+- name: Link files
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - { src: "{{ cfg_home }}/zsh/zshenv", dest: "{{ home }}/.zshenv" }
+    - { src: "{{ cfg_home }}/zsh/.zshrc", dest: "{{ home }}/.zshrc" }
+...
+

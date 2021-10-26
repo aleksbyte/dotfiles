@@ -1,0 +1,53 @@
+#
+- name: Install config files neovim
+  ansible.builtin.file:
+    path: "{{ cfg_home }}/nvim"
+    path: "{{ cfg_home }}/nvim/lua"
+    path: "{{ cfg_home }}/nvim/colors"
+    path: "{{ cfg_home }}/nvim/autoload"
+    state: directory
+    owner: alx
+    mode: '0755'
+#
+#- name: Check directory.
+#  stat:
+#       #path: /Users/alx/test/zsh
+#    path: "{{ cfg_home }}/nvim"
+#    register: dst_folder
+#
+#- name: "echo if directory already existed"
+#  debug:
+#    msg: "the zsh config directory is already existed"
+#  when: dst_folder.stat.exists
+#
+# Copy files
+- name: Copy nvim config files.
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: alx
+    mode: u+rw,g+r,o+r
+#         #  with_items:
+  loop:
+    - { src: 'files/nvim/init.vim', dest: "{{ cfg_home }}/nvim" }
+    - { src: 'files/nvim/coc-settings.json', dest: "{{ cfg_home }}/nvim" }
+    - { src: 'files/nvim/lua/', dest: "{{ cfg_home }}/nvim/lua/" }
+    - { src: 'files/nvim/colors/', dest: "{{ cfg_home }}/nvim/colors/" }
+
+- name: Download plug.vim.
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ cfg_home }}/nvim/autoload"
+    owner: alx
+    mode: 'u+rw,g+r,o+r'
+
+- name: Run plug.vim.
+  command: /opt/homebrew/bin/pip3 install neovim
+
+- name: Run plug.vim.
+  command: nvim -E -s -u {{ cfg_home }}/nvim/init.vim +PlugInstall +qall
+  register: installed
+    #  no_log: true
+    #  ignore_errors: yes
+
+

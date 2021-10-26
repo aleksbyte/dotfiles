@@ -70,8 +70,10 @@ if [[ -x /opt/homebrew/bin/exa ]]; then
    alias lt='exa -aT --color=always --group-directories-first' # tree listing
 fi
 # Tree
-alias tt="tree -L 2 -aC -I '.git |.DS_Store'"
-alias ttt="tree -L 3 -aC -I '.git |.DS_Store'"
+# alias tt="tree -L 2 -aC -I '.git |.DS_Store'"
+# alias ttt="tree -L 3 -aC -I '.git |.DS_Store'"
+alias tt="tree -L 2 -aC -I '.git'"
+alias ttt="tree -L 3 -aC -I '.git'"
 alias tre='tree -Ca'        # nice alternative to 'ls'
 # Finding stuff!
 # alias fd='find . -type d -name'

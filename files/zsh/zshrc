@@ -275,3 +275,5 @@ typeset -U PATH
 if [[ "$(uname -m)" == "arm64" ]]; then
     export PATH="/opt/homebrew/bin:${PATH}"
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

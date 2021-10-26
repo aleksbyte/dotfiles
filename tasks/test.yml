@@ -1,0 +1,18 @@
+#
+######################
+- name: Test/Debug
+  debug:
+    msg: "{{ cfg_src }}"
+#
+- name: Test/Debug
+  debug:
+    msg: "{{ home }}"
+#    msg: env_home "{{ lookup('env','HOME') }} is environment var"
+#    msg: "{{ lookup('env','HOME') }} is environment var"
+#
+- name: Test/Debug
+  debug:
+    msg: "{{ cfg_home }}"
+#    msg: env_home "{{ lookup('env','HOME') }} is environment var"
+######################
+...
