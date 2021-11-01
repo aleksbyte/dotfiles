@@ -6,7 +6,7 @@
     path: "{{ cfg_home }}/nvim/colors"
     path: "{{ cfg_home }}/nvim/autoload"
     state: directory
-    owner: alx
+    owner: "{{ user }}"
     mode: '0755'
 #
 #- name: Check directory.
@@ -25,7 +25,7 @@
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: alx
+    owner: "{{ user }}"
     mode: u+rw,g+r,o+r
 #         #  with_items:
   loop:
@@ -38,7 +38,7 @@
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: "{{ cfg_home }}/nvim/autoload"
-    owner: alx
+    owner: "{{ user }}"
     mode: 'u+rw,g+r,o+r'
 
 - name: Run plug.vim.

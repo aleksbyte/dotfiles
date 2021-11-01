@@ -1,15 +1,13 @@
 #- name: Install zsh config files
 - name: Create a directory if it does not exist.
   ansible.builtin.file:
-    #    path: /Users/alx/test/zsh
     path: "{{ cfg_home }}/zsh"
     state: directory
-    owner: alx
+    owner: "{{ user }}"
     mode: '0755'
 
 - name: Check directory.
   stat:
-    #path: /Users/alx/test/zsh
     path: "{{ cfg_home }}/zsh"
   register: dst_folder
 
@@ -23,9 +21,8 @@
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: alx
+    owner: "{{ user }}"
     mode: u+rw,g+r,o+r,+x
-      #  with_items:
   loop:
     - { src: 'files/zsh/zshenv', dest: "{{ cfg_home }}/zsh" }
     - { src: 'files/zsh/zshrc', dest: "{{ cfg_home }}/zsh/.zshrc" }

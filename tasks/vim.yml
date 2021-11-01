@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: "{{ cfg_home }}/vim"
     state: directory
-    owner: alx
+    owner: "{{ user }}"
     mode: '0755'
 
 - name: Check directory.
@@ -21,7 +21,7 @@
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: alx
+    owner: "{{ user }}"
     mode: u+rw,g+r,o+r
   loop:
     - { src: 'files/vim/vimrc', dest: "{{ cfg_home }}/vim" }

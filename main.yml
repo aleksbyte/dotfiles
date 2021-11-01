@@ -24,10 +24,9 @@
       when: configure_nvim
       tags: ['nvim-cfg']
 
-#    - import_tasks: tasks/sshrc.yml
-#      when: configure_sshrc
-#      tags: ['sshrc-cfg']
-
+    - import_tasks: tasks/sshrc.yml
+      when: configure_sshrc
+      tags: ['sshrc-cfg']
 
 #
 #  tasks:
