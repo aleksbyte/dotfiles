@@ -5,12 +5,12 @@
 # XDG_DATA_HOME   := $(DST)/.local/share
 #
 user: "{{ lookup('env','USER') }}"
-# home: "{{ lookup('env','HOME') }}"
+home: "{{ lookup('env','HOME') }}"
 cfg_src: "{{ lookup('env','PWD') }} directory source for config files"
-# cfg_home: "{{ lookup('env','HOME') }}/.config"
+cfg_home: "{{ lookup('env','HOME') }}/.config"
 # DST for test:
-home: "{{ lookup('env','HOME') }}/test"
-cfg_home: "{{ lookup('env','HOME') }}/test/.config"
+# home: "{{ lookup('env','HOME') }}/test"
+# cfg_home: "{{ lookup('env','HOME') }}/test/.config"
 #
 
 # Set to 'true' to configure zsh.

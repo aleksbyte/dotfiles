@@ -1,0 +1,47 @@
+---
+#- name: Update Homebrew
+#- community.general.homebrew:
+#  homebrew: update_homebrew=yes
+
+# Update homebrew and upgrade all packages
+- community.general.homebrew:
+    update_homebrew: yes
+#    upgrade_all: yes
+
+
+
+
+
+#- name: Install libraries with Homebrew
+#  homebrew: name={{ item }} state=latest
+#  with_items:
+#    - coreutils
+#    - findutils
+#    - zsh
+#    - zsh-completions
+#    - ack
+#    - curl
+#    - git
+#    - nmap
+#    - python
+#    - python3
+#    - readline
+#    - rename
+#    - ssh-copy-id
+#    - vim
+#    - neovim
+#    - watch
+#    - tree
+#    - openssl
+#    - htop
+#    - tmux
+
+#- name: Install apps with Homebrew Cask
+#  homebrew_cask: name={{ item }} state=present
+#  with_items:
+#    - appcleaner
+#    - vlc
+#    - macpass
+
+#- name: Cleanup Brew packages
+#  command: brew cleanup
