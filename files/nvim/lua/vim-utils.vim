@@ -9,6 +9,10 @@ endif
 """
 call plug#begin()
 
+"Plug 'kyoz/purify', { 'rtp': 'vim' }
+"syntax on " This is required
+"colorscheme purify
+
 Plug 'skywind3000/asyncrun.vim'      " enable you to run shell commands in background
 """"" 'skywind3000/asyncrun.vim'  " enable you to run shell commands in background
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr> " run make
@@ -37,3 +41,15 @@ endfunction
 let g:asyncrun_open = 15
 """
 call plug#end()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" MarkDown in .vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" https://github.com/iamcco/markdown-preview.nvim
+"" -- live preview markdown files in browser
+"" Plug('iamcco/markdown-preview.nvim', { ['do'] = 'cd app & yarn install', ['for'] = { 'markdown', 'mdx' } })
+
+"" -- fold by heading
+"" Plug('masukomi/vim-markdown-folding')
+"" Plug('plasticboy/vim-markdown')
+

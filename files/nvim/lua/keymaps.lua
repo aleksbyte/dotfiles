@@ -35,8 +35,8 @@ map("n", "<leader>bd", "<cmd>bd!<CR>",  options) -- Close tab
 map("n", "<leader>bc", "<cmd>bc<CR>",   options) -- Close tab
 -- map("n", "<leader>bn", "<cmd>bn<CR>",  options) -- move to next buffer
 -- map("n", "<leader>bp", "<cmd>bp<CR>",  options) -- move to previous buffer
-map("n", "<C-Right>", "<cmd>bn<CR>",  options) -- move to next buffer, CTRL-Right
-map("n", "<C-Left>",  "<cmd>bp<CR>",  options) -- move to previous buffer, CTRL-Left
+-- map("n", "<C-Right>", "<cmd>bn<CR>",  options) -- move to next buffer, CTRL-Right
+-- map("n", "<C-Left>",  "<cmd>bp<CR>",  options) -- move to previous buffer, CTRL-Left
 -- map("n", "<leader>bp", "<cmd>BufferLinePick<CR>",   options) -- Pick a buffer or tab
 map("n", "<TAB>",   "<cmd>BufferLineCycleNext<CR>", options) -- Next Tab
 map("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", options) -- Prev Tab
