@@ -53,6 +53,13 @@ require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'     --> Snippets source for nvim-cmp
   use 'rafamadriz/friendly-snippets' --> Snippets collection for a set of different programming languages
 --
+  use 'ibhagwan/fzf-lua'             -->
+--  use { 'ibhagwan/fzf-lua', opt=false}
+--  use { 'ibhagwan/fzf-lua',
+--  -- optional for icon support
+--    requires = { 'kyazdani42/nvim-web-devicons' }
+--  }
+--
 --  use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }  --#???
   use { 'pianocomposer321/yabs.nvim', requires = { 'nvim-lua/plenary.nvim' }}
 --

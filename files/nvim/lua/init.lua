@@ -15,6 +15,7 @@ require('plugins/gitsigns')
 require('plugins/kommentary')
 require('plugins/lsp-config')
 require('plugins/nvim-cmp')
+require('plugins/fzf')
 -- require('plugins/code_runner')
 require('plugins/yabs')
 --
